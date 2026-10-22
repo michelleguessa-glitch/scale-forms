@@ -405,27 +405,27 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
       pfill=document.getElementById("pfill"),
       progLabel=document.getElementById("progLabel"),
       GF_URL="https://docs.google.com/forms/d/e/1FAIpQLSf9pBCYeps_gcYRZddj8bAol_erEly0SNZHkVxxi7LuYQsU3Q/formResponse",
-      FBZX="-5405838863894486671";
+      FBZX="-2727973596537621107";
   /* intake-page field name -> Google Form entry ID */
   var MAP={
-    "Full Name":"entry.1782708402",
-    "Shipping address":"entry.1941456930",
-    "LastPass account":"entry.483054290",
-    "Best way to reach you":"entry.964527670",
-    "Best contact information":"entry.116037544",
-    "Email inbox login":"entry.1056557320",
-    "Scheduling link":"entry.1383763363",
-    "Video calling link":"entry.358894939",
-    "Rewards/loyalty programs":"entry.1618765125",
-    "Rewards/loyalty login details":"entry.202430328",
-    "High floor preference":"entry.701066010",
-    "Airline program login details":"entry.1643615029",
-    "Airline program and KTN numbers":"entry.1621918610",
-    "Preferred wardrobe stylist":"entry.69803339",
-    "Preferred hair stylist/barber":"entry.1246510801",
-    "Preferred graphic designer":"entry.1318285697",
-    "Preferred photographer/videographer":"entry.1550489257",
-    "Preferred A/V engineer":"entry.761795258",
+    "Full Name":"entry.1539931727",
+    "Shipping address":"entry.1883436757",
+    "LastPass account":"entry.1831530433",
+    "Best way to reach you":"entry.700002193",
+    "Best contact information":"entry.1199015324",
+    "Email inbox login":"entry.707861388",
+    "Scheduling link":"entry.1030281387",
+    "Video calling link":"entry.1964586882",
+    "Rewards/loyalty programs":"entry.1220399406",
+    "Rewards/loyalty login details":"entry.1700995524",
+    "High floor preference":"entry.1130424952",
+    "Airline program login details":"entry.1060704745",
+    "Airline program and KTN numbers":"entry.636333607",
+    "Preferred wardrobe stylist":"entry.1455121200",
+    "Preferred hair stylist/barber":"entry.1080659094",
+    "Preferred graphic designer":"entry.1652529266",
+    "Preferred photographer/videographer":"entry.860584740",
+    "Preferred A/V engineer":"entry.886115859",
     "Preferred PR contact":"entry.1516974309",
     "Preferred MUA":"entry.2000819435",
     "Preferred esthetician":"entry.554213725",
@@ -456,9 +456,9 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
     "Father's name and contact details":"entry.1165077777",
     "Brother's name and contact details":"entry.461553531",
     "Sister's name and contact details":"entry.61351582",
-    "Food allergies":"entry.1654755563",
-    "Food and beverage preferences":"entry.1391692140",
-    "Other information":"entry.1711300756"
+    "Food allergies":"entry.1197337883",
+    "Food and beverage preferences":"entry.28100453",
+    "Other information":"entry.1751314292"
   };
   function fieldVal(name){
     var list=form.querySelectorAll('[name="'+name+'"]');
@@ -589,9 +589,9 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
     if(dob){
       var d=dob.split("-");
       if(d.length===3){
-        p.append("entry.789761510_year",String(parseInt(d[0],10)));
-        p.append("entry.789761510_month",String(parseInt(d[1],10)));
-        p.append("entry.789761510_day",String(parseInt(d[2],10)));
+        p.append("entry.988501608_year",String(parseInt(d[0],10)));
+        p.append("entry.988501608_month",String(parseInt(d[1],10)));
+        p.append("entry.988501608_day",String(parseInt(d[2],10)));
       }
     }
     p.append("fbzx",FBZX);
