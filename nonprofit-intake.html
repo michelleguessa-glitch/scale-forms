@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nonprofit Formation Intake — Scale With Michelle</title>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f0; --surface:#fffdf9; --ink:#1e3a30; --text:#33403a; --muted:#6e7a73;
+  --gold:#b08d3e; --gold-hi:#e9c874; --line:#e2d6bf; --req:#a73b47;
+  color-scheme:light;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:0 18px 60px}
+.hero{padding:34px 2px 8px;text-align:center}
+.kicker{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:2.1rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink)}
+.lede{color:var(--muted);margin-top:10px;font-size:.98rem;max-width:52ch;margin-left:auto;margin-right:auto}
+.timenote{margin-top:12px;font-weight:700;font-size:.95rem;color:var(--gold)}
+.goldrule{display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-hi));margin:18px auto 0;border-radius:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-top:18px;box-shadow:0 2px 14px rgba(176,141,62,.07)}
+.card h2{font-family:Georgia,"Times New Roman",serif;font-size:1.25rem;font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.card .secsub{font-size:.86rem;color:var(--muted);margin-bottom:6px}
+.subhead{font-family:Georgia,"Times New Roman",serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin:22px 0 2px;letter-spacing:-.01em}
+.subhelp{font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.field{margin-top:16px}
+.field label,.qlabel{display:block;font-weight:600;font-size:.95rem;color:var(--ink);margin-bottom:8px;line-height:1.45}
+.req{color:var(--req);font-weight:700}
+.field input[type=text],.field input[type=email],.field input[type=date],.field input[type=url],.field textarea{
+  width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 13px;
+  font:500 1rem "DM Sans",system-ui,sans-serif;background:#fff;color:var(--text)}
+.field input:focus,.field textarea:focus{outline:2px solid var(--gold-hi);outline-offset:1px;border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:84px}
+.opts{display:grid;gap:6px;margin-top:4px}
+.opt{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;cursor:pointer;min-height:48px;font-weight:500}
+.opt input{width:19px;height:19px;accent-color:var(--gold);flex:0 0 19px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.opts .subfield{margin-top:2px;margin-left:4px}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
+.submitbtn{display:block;width:100%;margin-top:24px;padding:16px;border:1.5px solid var(--gold);border-radius:999px;
+  background:transparent;color:var(--ink);font:700 1.02rem "DM Sans",system-ui,sans-serif;letter-spacing:.02em;
+  cursor:pointer;box-shadow:0 0 24px rgba(233,200,116,.35);transition:box-shadow .2s,transform .1s}
+.submitbtn:hover{box-shadow:0 0 32px rgba(233,200,116,.55)}
+.submitbtn:active{transform:scale(.99)}
+.submitbtn[disabled]{opacity:.6;cursor:wait}
+.formerr{display:none;margin-top:14px;padding:12px 14px;border:1px solid #e3b7b0;background:#fdf1ef;border-radius:10px;
+  color:#8c3a32;font-size:.9rem}
+#thanks{display:none;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:34px 24px;text-align:center;box-shadow:0 2px 14px rgba(176,141,62,.07)}
+#thanks h2{font-family:Georgia,"Times New Roman",serif;color:var(--ink);font-size:1.5rem;margin-bottom:10px}
+#thanks p{color:var(--muted);font-size:.96rem;max-width:44ch;margin:0 auto}
+#thanks .goldrule{margin-top:18px}
+footer{margin:36px 4px 0;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.7}
+footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0 auto 14px}
+@media (max-width:480px){
+  h1{font-size:1.75rem}
+  .card{padding:18px 15px}
+}
+
+.progwrap{margin-top:22px}
+.proglabel{font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.pbar{height:10px;background:#efe6d2;border-radius:999px;overflow:hidden}
+.pfill{height:100%;width:10%;background:linear-gradient(90deg,var(--gold),var(--gold-hi));border-radius:999px;transition:width .3s ease}
+.wnav{display:flex;gap:12px;margin-top:22px}
+.navbtn{flex:1;padding:15px;border-radius:999px;font:700 1rem "DM Sans",system-ui,sans-serif;cursor:pointer;letter-spacing:.02em;transition:box-shadow .2s,transform .1s}
+.navbtn.back{background:transparent;border:1.5px solid var(--line);color:var(--muted)}
+.navbtn.next{background:transparent;border:1.5px solid var(--gold);color:var(--ink);box-shadow:0 0 24px rgba(233,200,116,.35)}
+.navbtn.next:hover{box-shadow:0 0 32px rgba(233,200,116,.55)}
+.navbtn:active{transform:scale(.99)}
+.navbtn[disabled]{opacity:.6;cursor:wait}
+.dblock{border-top:1px solid var(--line);margin-top:18px;padding-top:6px}
+.dblock:first-of-type{border-top:none;margin-top:0;padding-top:0}
+.dhead{font-family:Georgia,"Times New Roman",serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin-top:14px}
+.addbtn{display:inline-block;margin-top:4px;padding:11px 22px;border:1.5px dashed var(--gold);border-radius:999px;background:transparent;color:var(--ink);font:700 .95rem "DM Sans",system-ui,sans-serif;cursor:pointer}
+.addbtn:hover{box-shadow:0 0 18px rgba(233,200,116,.4)}
+.hint{font-size:.82rem;color:var(--muted);margin-top:8px}
+.fdesc{font-size:.85rem;color:var(--muted);margin:-4px 0 8px;line-height:1.5}
+select.stateselect{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 13px;font:500 1rem "DM Sans",system-ui,sans-serif;background:#fff;color:var(--text);appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23b08d3e' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+select.stateselect:focus{outline:2px solid var(--gold-hi);outline-offset:1px;border-color:var(--gold)}
+.statecallout{background:#fdf8ec;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;margin-top:16px;font-size:.9rem;color:var(--text);line-height:1.6}
+.statecallout .schead{font-weight:700;color:var(--ink);margin-bottom:6px;font-size:.95rem}
+.statecallout p{margin:4px 0}
+.statecallout .scfoot{margin-top:8px;font-size:.8rem;color:var(--muted);font-style:italic}
+
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="kicker">Scale With Michelle</p>
+    <h1>Nonprofit Formation Intake</h1>
+    <p class="lede">This form gathers everything needed to prepare your Articles of Incorporation, EIN application, and IRS Form 1023.</p>
+    <p class="timenote">Please set aside 20&ndash;30 minutes to complete this form.</p>
+    <span class="goldrule"></span>
+    <div class="progwrap" id="progwrap">
+      <p class="proglabel" id="progLabel">Step 1 of 13 &mdash; Where Are You Organizing?</p>
+      <div class="pbar"><div class="pfill" id="pfill"></div></div>
+    </div>
+  </header>
+
+  <form id="npForm" method="POST" novalidate>
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <section class="card wstep">
+      <h2>Where Are You Organizing?</h2>
+      <p class="secsub">Pick the state where you will file your Articles of Incorporation.</p>
+      <div class="field">
+        <label>City where organizing <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" name="City where organizing" placeholder="City" data-req="1" autocomplete="address-level2">
+      </div>
+      <div class="field">
+        <label>State where organizing <span class="req" aria-hidden="true">*</span></label>
+        <select name="State where organizing" data-req="1" class="stateselect">
+        <option value="">Select a state&hellip;</option>
+        <option>Alabama</option>
+        <option>Alaska</option>
+        <option>Arizona</option>
+        <option>Arkansas</option>
+        <option>California</option>
+        <option>Colorado</option>
+        <option>Connecticut</option>
+        <option>Delaware</option>
+        <option>District of Columbia</option>
+        <option>Florida</option>
+        <option>Georgia</option>
+        <option>Hawaii</option>
+        <option>Idaho</option>
+        <option>Illinois</option>
+        <option>Indiana</option>
+        <option>Iowa</option>
+        <option>Kansas</option>
+        <option>Kentucky</option>
+        <option>Louisiana</option>
+        <option>Maine</option>
+        <option>Maryland</option>
+        <option>Massachusetts</option>
+        <option>Michigan</option>
+        <option>Minnesota</option>
+        <option>Mississippi</option>
+        <option>Missouri</option>
+        <option>Montana</option>
+        <option>Nebraska</option>
+        <option>Nevada</option>
+        <option>New Hampshire</option>
+        <option>New Jersey</option>
+        <option>New Mexico</option>
+        <option>New York</option>
+        <option>North Carolina</option>
+        <option>North Dakota</option>
+        <option>Ohio</option>
+        <option>Oklahoma</option>
+        <option>Oregon</option>
+        <option>Pennsylvania</option>
+        <option>Rhode Island</option>
+        <option>South Carolina</option>
+        <option>South Dakota</option>
+        <option>Tennessee</option>
+        <option>Texas</option>
+        <option>Utah</option>
+        <option>Vermont</option>
+        <option>Virginia</option>
+        <option>Washington</option>
+        <option>West Virginia</option>
+        <option>Wisconsin</option>
+        <option>Wyoming</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Organization Basics</h2>
+      <div class="statecallout" id="scFiling" hidden></div>
+      <div class="field">
+        <label>Founder full name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" name="Founder full name" placeholder="Your full name" data-req="1">
+      </div>
+      <div class="field">
+        <label>Founder email <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" name="Founder email" placeholder="you@example.com" data-req="1">
+      </div>
+      <div class="field">
+        <label>Founder phone <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" name="Founder phone" placeholder="(555) 123-4567" data-req="1">
+      </div>
+      <div class="field">
+        <label>Proposed legal name — 1st choice <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" name="Proposed legal name — 1st choice" data-req="1">
+      </div>
+      <div class="field">
+        <label>Proposed legal name — 2nd choice</label>
+        <input type="text" name="Proposed legal name — 2nd choice">
+      </div>
+      <div class="field">
+        <label>Proposed legal name — 3rd choice</label>
+        <input type="text" name="Proposed legal name — 3rd choice">
+      </div>
+      <div class="field">
+        <p class="qlabel">Entity type</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Entity type" value="Nonprofit Corporation"> Nonprofit Corporation</label>
+          <label class="opt"><input type="radio" name="Entity type" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Corporate designator preference</label>
+      <p class="fdesc">Inc. / NFP / Corporation / No preference — use what filing requires</p>
+        <input type="text" name="Corporate designator preference">
+      </div>
+      <div class="field">
+        <label>Principal office — full street address</label>
+      <p class="fdesc">Street, city, state, ZIP</p>
+        <textarea name="Principal office — full street address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Mailing address, if different</label>
+        <textarea name="Mailing address, if different" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Organization phone</label>
+        <input type="text" name="Organization phone">
+      </div>
+      <div class="field">
+        <label>Organization email</label>
+        <input type="email" name="Organization email">
+      </div>
+      <div class="field">
+        <label>Website (if any)</label>
+        <input type="text" name="Website (if any)" placeholder="https://">
+      </div>
+      <div class="field">
+        <label>Fiscal year end (month / day)</label>
+      <p class="fdesc">Common choice: December 31. This drives every future filing deadline.</p>
+        <input type="text" name="Fiscal year end (month / day)">
+      </div>
+      <div class="field">
+        <label>Date the organization should legally exist</label>
+      <p class="fdesc">Or write &quot;as soon as filed&quot;</p>
+        <input type="text" name="Date the organization should legally exist">
+      </div>
+      <div class="field">
+        <label>For-profit practice (legal name)</label>
+        <input type="text" name="For-profit practice (legal name)">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Registered Agent</h2>
+      <p class="secsub" id="agentNote">Every state requires a registered agent with an in-state address. Your state&#x2019;s exact rule appears below.</p>
+      <div class="statecallout" id="scAgent" hidden></div>
+      <div class="field">
+        <label>Registered agent — full name</label>
+        <input type="text" name="Registered agent — full name">
+      </div>
+      <div class="field">
+        <label>Registered office — street address</label>
+        <textarea name="Registered office — street address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <p class="qlabel">Has the agent agreed to serve?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Has the agent agreed to serve?" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="Has the agent agreed to serve?" value="No — agreement still needed"> No — agreement still needed</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Board of Directors</h2>
+      <p class="secsub"><span id="dirMinText">Your state</span> requires at least <span id="dirMinNum">3</span> directors. For IRS purposes, aim for a board in which a majority are independent — not the founder, not family of the founder, and not owners or employees of the for-profit practice.</p>
+      <div class="statecallout" id="scBoard" hidden></div>
+      <div class="dblock" id="dblock-1">
+        <p class="dhead">Director 1</p>
+      <div class="field">
+        <label>Director 1 — full legal name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" name="Director 1 — full legal name" data-req="1">
+      </div>
+      <div class="field">
+        <label>Director 1 — home address</label>
+        <textarea name="Director 1 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 1 — phone</label>
+        <input type="text" name="Director 1 — phone">
+      </div>
+      <div class="field">
+        <label>Director 1 — email</label>
+        <input type="email" name="Director 1 — email">
+      </div>
+      <div class="field">
+        <label>Director 1 — board role / title, if known</label>
+        <input type="text" name="Director 1 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 1 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 1 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 1 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 1 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 1 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="dblock" id="dblock-2" hidden>
+        <p class="dhead">Director 2</p>
+      <div class="field">
+        <label>Director 2 — full legal name</label>
+        <input type="text" name="Director 2 — full legal name">
+      </div>
+      <div class="field">
+        <label>Director 2 — home address</label>
+        <textarea name="Director 2 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 2 — phone</label>
+        <input type="text" name="Director 2 — phone">
+      </div>
+      <div class="field">
+        <label>Director 2 — email</label>
+        <input type="email" name="Director 2 — email">
+      </div>
+      <div class="field">
+        <label>Director 2 — board role / title, if known</label>
+        <input type="text" name="Director 2 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 2 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 2 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 2 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 2 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 2 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="dblock" id="dblock-3" hidden>
+        <p class="dhead">Director 3</p>
+      <div class="field">
+        <label>Director 3 — full legal name</label>
+        <input type="text" name="Director 3 — full legal name">
+      </div>
+      <div class="field">
+        <label>Director 3 — home address</label>
+        <textarea name="Director 3 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 3 — phone</label>
+        <input type="text" name="Director 3 — phone">
+      </div>
+      <div class="field">
+        <label>Director 3 — email</label>
+        <input type="email" name="Director 3 — email">
+      </div>
+      <div class="field">
+        <label>Director 3 — board role / title, if known</label>
+        <input type="text" name="Director 3 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 3 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 3 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 3 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 3 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 3 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="dblock" id="dblock-4" hidden>
+        <p class="dhead">Director 4</p>
+      <div class="field">
+        <label>Director 4 — full legal name</label>
+        <input type="text" name="Director 4 — full legal name">
+      </div>
+      <div class="field">
+        <label>Director 4 — home address</label>
+        <textarea name="Director 4 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 4 — phone</label>
+        <input type="text" name="Director 4 — phone">
+      </div>
+      <div class="field">
+        <label>Director 4 — email</label>
+        <input type="email" name="Director 4 — email">
+      </div>
+      <div class="field">
+        <label>Director 4 — board role / title, if known</label>
+        <input type="text" name="Director 4 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 4 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 4 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 4 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 4 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 4 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="dblock" id="dblock-5" hidden>
+        <p class="dhead">Director 5</p>
+      <div class="field">
+        <label>Director 5 — full legal name</label>
+        <input type="text" name="Director 5 — full legal name">
+      </div>
+      <div class="field">
+        <label>Director 5 — home address</label>
+        <textarea name="Director 5 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 5 — phone</label>
+        <input type="text" name="Director 5 — phone">
+      </div>
+      <div class="field">
+        <label>Director 5 — email</label>
+        <input type="email" name="Director 5 — email">
+      </div>
+      <div class="field">
+        <label>Director 5 — board role / title, if known</label>
+        <input type="text" name="Director 5 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 5 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 5 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 5 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 5 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 5 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="dblock" id="dblock-6" hidden>
+        <p class="dhead">Director 6</p>
+      <div class="field">
+        <label>Director 6 — full legal name</label>
+        <input type="text" name="Director 6 — full legal name">
+      </div>
+      <div class="field">
+        <label>Director 6 — home address</label>
+        <textarea name="Director 6 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 6 — phone</label>
+        <input type="text" name="Director 6 — phone">
+      </div>
+      <div class="field">
+        <label>Director 6 — email</label>
+        <input type="email" name="Director 6 — email">
+      </div>
+      <div class="field">
+        <label>Director 6 — board role / title, if known</label>
+        <input type="text" name="Director 6 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 6 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 6 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 6 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 6 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 6 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="dblock" id="dblock-7" hidden>
+        <p class="dhead">Director 7</p>
+      <div class="field">
+        <label>Director 7 — full legal name</label>
+        <input type="text" name="Director 7 — full legal name">
+      </div>
+      <div class="field">
+        <label>Director 7 — home address</label>
+        <textarea name="Director 7 — home address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Director 7 — phone</label>
+        <input type="text" name="Director 7 — phone">
+      </div>
+      <div class="field">
+        <label>Director 7 — email</label>
+        <input type="email" name="Director 7 — email">
+      </div>
+      <div class="field">
+        <label>Director 7 — board role / title, if known</label>
+        <input type="text" name="Director 7 — board role / title, if known">
+      </div>
+      <div class="field">
+        <p class="qlabel">Director 7 — relationship to the for-profit practice</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Director 7 — relationship to the for-profit practice" value="Owner"> Owner</label>
+          <label class="opt"><input type="radio" name="Director 7 — relationship to the for-profit practice" value="Employee"> Employee</label>
+          <label class="opt"><input type="radio" name="Director 7 — relationship to the for-profit practice" value="Family"> Family</label>
+          <label class="opt"><input type="radio" name="Director 7 — relationship to the for-profit practice" value="Independent"> Independent</label>
+        </div>
+      </div>
+      </div>
+      <div class="field">
+        <button type="button" class="addbtn" id="addDirBtn">+ Add another director</button>
+        <p class="hint"><span id="dirMinHintState">Your state</span> requires at least <span id="dirMinHintNum">3</span> directors.</p>
+      </div>
+      <div class="field">
+        <p class="qlabel">Do you have at least 3 independent directors identified?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Do you have at least 3 independent directors identified?" value="Yes — I have at least 3 independent directors identified"> Yes — I have at least 3 independent directors identified</label>
+          <label class="opt"><input type="radio" name="Do you have at least 3 independent directors identified?" value="No — recruiting is still needed"> No — recruiting is still needed</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Who still needs to be recruited, and by when?</label>
+        <textarea name="Who still needs to be recruited, and by when?" rows="2"></textarea>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Officers</h2>
+      <p class="secsub">The Secretary and the Treasurer should ideally be independent directors. One person may not hold every office.</p>
+      <div class="field">
+        <label>President / CEO</label>
+        <input type="text" name="President / CEO">
+      </div>
+      <div class="field">
+        <label>Secretary</label>
+        <input type="text" name="Secretary">
+      </div>
+      <div class="field">
+        <label>Treasurer</label>
+        <input type="text" name="Treasurer">
+      </div>
+      <div class="field">
+        <label>Vice President name</label>
+        <input type="text" name="Vice President name">
+      </div>
+      <div class="field">
+        <label>Other officer — title and name, if any</label>
+        <input type="text" name="Other officer — title and name, if any">
+      </div>
+      <div class="field">
+        <p class="qlabel">Will this be a membership organization?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will this be a membership organization?" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="Will this be a membership organization?" value="No"> No</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>If yes, describe who the members are and what rights they have</label>
+        <textarea name="If yes, describe who the members are and what rights they have" rows="3"></textarea>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Mission, Vision &amp; Programs</h2>
+      <p class="secsub">This section becomes the narrative at the heart of Form 1023. Answer in your own words, in as much detail as you can — specifics here prevent follow-up questions later.</p>
+      <div class="field">
+        <label>Mission statement — what the organization exists to do <span class="req" aria-hidden="true">*</span></label>
+        <textarea name="Mission statement — what the organization exists to do" rows="4" data-req="1"></textarea>
+      </div>
+      <div class="field">
+        <label>Vision statement — the change you want to see in the community</label>
+        <textarea name="Vision statement — the change you want to see in the community" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label>Programs and services — describe each one</label>
+      <p class="fdesc">What services, how they are delivered (in person, virtual, group, individual), where, and how often.</p>
+        <textarea name="Programs and services — describe each one" rows="4"></textarea>
+      </div>
+      <div class="field">
+        <label>Who exactly will be served? Describe the underserved communities</label>
+      <p class="fdesc">Who they are, where they live, and what need they face.</p>
+        <textarea name="Who exactly will be served? Describe the underserved communities" rows="4"></textarea>
+      </div>
+      <div class="field">
+        <label>How will the nonprofit find and reach these communities?</label>
+      <p class="fdesc">Referrals, community partners, outreach, waitlists from the practice, other.</p>
+        <textarea name="How will the nonprofit find and reach these communities?" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label>Will services be free, sliding-scale, or fee-based? Describe</label>
+      <p class="fdesc">Who pays, how fees are set, and what happens if someone cannot pay.</p>
+        <textarea name="Will services be free, sliding-scale, or fee-based? Describe" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label>Programs planned for the future that will not start in year one</label>
+      <p class="fdesc">Describe each and when it might start.</p>
+        <textarea name="Programs planned for the future that will not start in year one" rows="3"></textarea>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Business Plan</h2>
+      <p class="secsub">These answers become the vision, objectives, strategies, and action plan in your business plan document. Answer what you can — every field is optional.</p>
+      <p class="subhead">Vision</p>
+      <p class="subhelp">The future you are working toward — paint the picture of what success looks like.</p>
+      <div class="field">
+        <label>Vision point 1</label>
+        <textarea name="Vision point 1" rows="2" placeholder="e.g. Provide free services to 500 underserved residents in our first year"></textarea>
+      </div>
+      <div class="field">
+        <label>Vision point 2</label>
+        <textarea name="Vision point 2" rows="2" placeholder="e.g. Become the trusted resource for our community in [city]"></textarea>
+      </div>
+      <div class="field">
+        <label>Vision point 3</label>
+        <textarea name="Vision point 3" rows="2" placeholder="e.g. Build partnerships with 10 local organizations for referrals"></textarea>
+      </div>
+      <div class="field">
+        <label>Vision point 4</label>
+        <textarea name="Vision point 4" rows="2" placeholder="e.g. Expand programs to neighboring counties by year three"></textarea>
+      </div>
+      <p class="subhead">Objectives</p>
+      <p class="subhelp">Measurable goals — what will the organization accomplish?</p>
+      <div class="field">
+        <label>Objective 1</label>
+        <textarea name="Objective 1" rows="2" placeholder="e.g. Serve 200 clients through our core program in year one"></textarea>
+      </div>
+      <div class="field">
+        <label>Objective 2</label>
+        <textarea name="Objective 2" rows="2" placeholder="e.g. Raise $50,000 in grants and donations annually"></textarea>
+      </div>
+      <div class="field">
+        <label>Objective 3</label>
+        <textarea name="Objective 3" rows="2" placeholder="e.g. Recruit and train 25 volunteers"></textarea>
+      </div>
+      <p class="subhead">Strategies</p>
+      <p class="subhelp">Your approach — how will you get there?</p>
+      <div class="field">
+        <label>Strategy 1</label>
+        <textarea name="Strategy 1" rows="2" placeholder="e.g. Host monthly free community workshops to build awareness"></textarea>
+      </div>
+      <div class="field">
+        <label>Strategy 2</label>
+        <textarea name="Strategy 2" rows="2" placeholder="e.g. Partner with schools and faith groups for outreach"></textarea>
+      </div>
+      <p class="subhead">Action Plan</p>
+      <p class="subhelp">Concrete first steps and when they will happen.</p>
+      <div class="field">
+        <label>Action plan year range</label>
+        <input type="text" name="Action plan year range" placeholder="e.g. 2026-2027">
+      </div>
+      <div class="field">
+        <label>Action item 1</label>
+        <textarea name="Action item 1" rows="2" placeholder="e.g. File Articles of Incorporation"></textarea>
+      </div>
+      <div class="field">
+        <label>Action item 2</label>
+        <textarea name="Action item 2" rows="2" placeholder="e.g. Launch website and online intake"></textarea>
+      </div>
+      <div class="field">
+        <label>Action item 3</label>
+        <textarea name="Action item 3" rows="2" placeholder="e.g. Hold first community fundraiser event"></textarea>
+      </div>
+      <div class="field">
+        <label>Action item 4</label>
+        <textarea name="Action item 4" rows="2" placeholder="e.g. Apply for first grant cycle"></textarea>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Financial Picture</h2>
+      <p class="secsub">These figures determine whether the organization files the full Form 1023 or Form 1023-EZ, and they are required on the application itself. Use your best good-faith estimates.</p>
+      <div class="field">
+        <label>Expected gross receipts — Year 1</label>
+        <input type="text" name="Expected gross receipts — Year 1" placeholder="$">
+      </div>
+      <div class="field">
+        <label>Expected gross receipts — Year 2</label>
+        <input type="text" name="Expected gross receipts — Year 2" placeholder="$">
+      </div>
+      <div class="field">
+        <label>Expected gross receipts — Year 3</label>
+        <input type="text" name="Expected gross receipts — Year 3" placeholder="$">
+      </div>
+      <div class="field">
+        <label>Expected total assets at any point</label>
+        <input type="text" name="Expected total assets at any point" placeholder="$">
+      </div>
+      <div class="field">
+        <p class="qlabel">Based on the figures above</p>
+      <p class="fdesc">Form 1023-EZ is available only if expected gross receipts are $50,000 or less in each year AND total assets are $250,000 or less. If either figure is higher, the full Form 1023 is required.</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Based on the figures above" value="Likely 1023 Full"> Likely 1023 Full</label>
+          <label class="opt"><input type="radio" name="Based on the figures above" value="Likely 1023-EZ"> Likely 1023-EZ</label>
+          <label class="opt"><input type="radio" name="Based on the figures above" value="Unclear"> Unclear</label>
+        </div>
+      </div>
+      <div class="field">
+        <p class="qlabel">Expected funding sources</p>
+        <div class="opts" role="group">
+          <label class="opt"><input type="checkbox" name="Expected funding sources" value="Grants"> Grants</label>
+          <label class="opt"><input type="checkbox" name="Expected funding sources" value="Individual donations"> Individual donations</label>
+          <label class="opt"><input type="checkbox" name="Expected funding sources" value="Fundraising events"> Fundraising events</label>
+          <label class="opt"><input type="checkbox" name="Expected funding sources" value="Government funding"> Government funding</label>
+          <label class="opt"><input type="checkbox" name="Expected funding sources" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Other funding source — describe</label>
+        <input type="text" name="Other funding source — describe">
+      </div>
+      <div class="field">
+        <label>Will the nonprofit pay anyone compensation in year one? If yes, who and in what role?</label>
+      <p class="fdesc">Amounts are set later.</p>
+        <textarea name="Will the nonprofit pay anyone compensation in year one? If yes, who and in what role?" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Startup funding — how will filing fees and initial costs be covered?</label>
+        <textarea name="Startup funding — how will filing fees and initial costs be covered?" rows="2"></textarea>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Fundraising Plans</h2>
+      <p class="secsub" id="fundNote">Most states require charitable solicitation registration before you ask for donations. Your state&#x2019;s rule appears below.</p>
+      <div class="statecallout" id="scFund" hidden></div>
+      <div class="field">
+        <p class="qlabel">Will the nonprofit solicit donations in its home state in year one?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will the nonprofit solicit donations in its home state in year one?" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="Will the nonprofit solicit donations in its home state in year one?" value="No"> No</label>
+        </div>
+      </div>
+      <div class="field">
+        <p class="qlabel">Fundraising methods planned</p>
+        <div class="opts" role="group">
+          <label class="opt"><input type="checkbox" name="Fundraising methods planned" value="Online donations"> Online donations</label>
+          <label class="opt"><input type="checkbox" name="Fundraising methods planned" value="Mail"> Mail</label>
+          <label class="opt"><input type="checkbox" name="Fundraising methods planned" value="Events"> Events</label>
+          <label class="opt"><input type="checkbox" name="Fundraising methods planned" value="Grants only"> Grants only</label>
+          <label class="opt"><input type="checkbox" name="Fundraising methods planned" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Other fundraising method — describe</label>
+        <input type="text" name="Other fundraising method — describe">
+      </div>
+      <div class="field">
+        <p class="qlabel">Will any paid fundraiser or fundraising consultant be used?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will any paid fundraiser or fundraising consultant be used?" value="No"> No</label>
+          <label class="opt"><input type="radio" name="Will any paid fundraiser or fundraising consultant be used?" value="Yes"> Yes</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Paid fundraiser / consultant name</label>
+        <input type="text" name="Paid fundraiser / consultant name">
+      </div>
+      <div class="field">
+        <p class="qlabel">Will the organization solicit donations or fundraise in any state other than its home state?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will the organization solicit donations or fundraise in any state other than its home state?" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="Will the organization solicit donations or fundraise in any state other than its home state?" value="No"> No</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>If yes, list each state</label>
+      <p class="fdesc">Most states require charitable solicitation registration before fundraising begins there.</p>
+        <textarea name="If yes, list each state" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <p class="qlabel">Will the organization conduct any lobbying activities?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will the organization conduct any lobbying activities?" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="Will the organization conduct any lobbying activities?" value="No"> No</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>If yes, describe the lobbying activities</label>
+        <textarea name="If yes, describe the lobbying activities" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <p class="qlabel">Will the organization participate in any political campaign activity for or against any candidate?</p>
+      <p class="fdesc">501(c)(3) organizations are prohibited from political campaign activity.</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will the organization participate in any political campaign activity for or against any candidate?" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="Will the organization participate in any political campaign activity for or against any candidate?" value="No"> No</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Relationship With the For-Profit</h2>
+      <p class="secsub">Needed for the shared services agreement and for the Form 1023 narrative. The nonprofit is a separate legal entity, created by the for-profit&#x27;s founder as an extension of its mission to serve underserved communities.</p>
+      <div class="field">
+        <p class="qlabel">Will the nonprofit share office space with the practice?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will the nonprofit share office space with the practice?" value="No"> No</label>
+          <label class="opt"><input type="radio" name="Will the nonprofit share office space with the practice?" value="Yes"> Yes</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>If yes — address and approximate square footage</label>
+        <textarea name="If yes — address and approximate square footage" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <p class="qlabel">Will any staff work for both entities?</p>
+        <div class="opts" role="radiogroup">
+          <label class="opt"><input type="radio" name="Will any staff work for both entities?" value="No"> No</label>
+          <label class="opt"><input type="radio" name="Will any staff work for both entities?" value="Yes"> Yes</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>If yes — which roles?</label>
+        <textarea name="If yes — which roles?" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Will the practice provide any services to the nonprofit? Describe</label>
+      <p class="fdesc">Billing, administration, IT, clinical supervision, other.</p>
+        <textarea name="Will the practice provide any services to the nonprofit? Describe" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label>Will the nonprofit refer clients to the practice, or the practice to the nonprofit? Describe</label>
+      <p class="fdesc">How referrals would work in each direction.</p>
+        <textarea name="Will the nonprofit refer clients to the practice, or the practice to the nonprofit? Describe" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label>Founder initials — shared arrangements in writing at fair market value</label>
+      <p class="fdesc">Type your initials to confirm: every shared arrangement — space, staff, and services — must be in writing at fair market value.</p>
+        <input type="text" name="Founder initials — shared arrangements in writing at fair market value">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Incorporator</h2>
+      <p class="secsub">The incorporator signs the Articles of Incorporation. This is usually the founder or her attorney.</p>
+      <div class="field">
+        <label>Incorporator — full legal name</label>
+        <input type="text" name="Incorporator — full legal name">
+      </div>
+      <div class="field">
+        <label>Incorporator — address</label>
+        <textarea name="Incorporator — address" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Incorporator — phone</label>
+        <input type="text" name="Incorporator — phone">
+      </div>
+      <div class="field">
+        <label>Incorporator — email</label>
+        <input type="email" name="Incorporator — email">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Organizational Meeting</h2>
+      <p class="secsub">These details go straight into your organizational board meeting minutes and bylaws. Answer what you can — every field is optional.</p>
+      <div class="field">
+        <label>Date of organizational board meeting</label>
+        <input type="date" name="Date of organizational board meeting">
+      </div>
+      <div class="field">
+        <label>Meeting time</label>
+        <input type="text" name="Meeting time" placeholder="e.g. 6:00 PM">
+      </div>
+      <div class="field">
+        <label>Members present at organizational meeting</label>
+        <textarea name="Members present at organizational meeting" rows="3" placeholder="List everyone who attended"></textarea>
+      </div>
+      <div class="field">
+        <label>How often will the board meet?</label>
+        <input type="text" name="How often will the board meet?" placeholder="e.g. once per month">
+      </div>
+      <div class="field">
+        <label>Regular meeting day</label>
+        <input type="text" name="Regular meeting day" placeholder="e.g. fourth Monday of the month">
+      </div>
+      <div class="field">
+        <label>Director term length</label>
+        <input type="text" name="Director term length" placeholder="e.g. three years">
+      </div>
+      <div class="field">
+        <label>Who will pay the filing fees?</label>
+        <input type="text" name="Who will pay the filing fees?" placeholder="Name(s) of members covering state + federal filing fees">
+      </div>
+      <div class="field">
+        <label>Who will cover business supply expenses?</label>
+        <input type="text" name="Who will cover business supply expenses?" placeholder="Name(s) of members covering supplies, printing, website">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Follow-Up &amp; Next Steps</h2>
+      <p class="secsub">Please review every section before submitting. Anything left blank will require a follow-up before a filing can be prepared.</p>
+      <div class="field">
+        <label>Best contact for follow-up questions</label>
+      <p class="fdesc">Name, phone, email, best time / method.</p>
+        <textarea name="Best contact for follow-up questions" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label>Anything else you want your consultant to know</label>
+        <textarea name="Anything else you want your consultant to know" rows="4"></textarea>
+      </div>
+    </section>
+
+    <p class="formerr" id="stepErr" role="alert"></p>
+    <p class="formerr" id="formErr" role="alert">Something went wrong sending your form. Please check your connection and try again.</p>
+    <div class="wnav">
+      <button type="button" class="navbtn back" id="backBtn">&larr; Back</button>
+      <button type="button" class="navbtn next" id="nextBtn">Continue &rarr;</button>
+    </div>
+  </form>
+
+  <div id="thanks" role="status">
+    <p class="kicker">Thank you</p>
+    <h2>Intake form received</h2>
+    <p>Your answers have been sent. Michelle will review them and be in touch shortly about your nonprofit formation.</p>
+    <span class="goldrule"></span>
+  </div>
+
+  <footer>
+    <span class="rule"></span>
+    This page is private &mdash; only people with the link can see it.
+  </footer>
+</div>
+<script>
+"use strict";
+/* State requirements knowledge base (verified_as_of per state). */
+var STATE_REQ={"AK":{"state":"Alaska","filing_office":"Alaska Division of Corporations, Business and Professional Licensing (Corporations Section)","form_name":"Articles of Incorporation (Form 08-0438)","filing_fee":50,"filing_fee_note":"File online or by mail; submit two copies when filing by paper; add the IRS 501(c)(3) purpose and dissolution clauses in the articles' optional provisions section","registered_agent_rule":"Required; must be an individual or entity with an Alaska street address — the registered agent's physical address is required (PO box alone is not enough)","registered_agent_required":true,"min_directors":3,"annual_report_fee":25,"annual_report_frequency":"Biennial","annual_report_due":"Biennial report due July 2 every 2 years, in the same even/odd year as your formation (Alaska has no annual report for nonprofits); also file a free Initial Report within 6 months of incorporation","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the AK Department of Law, Consumer Protection Unit (Charitable Organization Registration, $40) BEFORE soliciting; registration expires September 1 each year and must be renewed annually","publication_required":false,"verified_as_of":"2026-10-15"},"AL":{"state":"Alabama","filing_office":"Alabama Secretary of State","form_name":"Domestic Nonprofit Corporation Certificate of Incorporation","filing_fee":200,"filing_fee_note":"Includes $100 the Secretary of State forwards to the county treasurer; includes your IRS-required purpose and dissolution clauses in the certificate itself; optional expedited processing available on the cover sheet","registered_agent_rule":"Required; must have an Alabama street address; individual resident or business entity authorized in Alabama","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"None required","annual_report_due":"Alabama does not require an annual report from nonprofit corporations (annual reports apply only to for-profit corporations)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the AL Attorney General ($25 initial and $25 annual, filed online) before soliciting; renew annually within 90 days of fiscal year close with a financial report or Form 990","publication_required":false,"verified_as_of":"2026-10-15"},"AR":{"state":"Arkansas","filing_office":"Arkansas Secretary of State","form_name":"Articles of Incorporation for Domestic Nonprofit Corporation — 501(c)(3) version (Form NPD-01-501-c-3)","filing_fee":45,"filing_fee_note":"$45 online or $50 on paper; use the dedicated 501(c)(3) version of the form so the IRS-required purpose language is built in, and add the dissolution clause if needed","registered_agent_rule":"Required; must have an Arkansas street address; individual resident or business entity authorized in Arkansas","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"On or before August 1 each year, starting the year after filing","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the AR Secretary of State (no fee for the charity itself; file by email to charities@sos.arkansas.gov) before soliciting; renew annually","publication_required":false,"verified_as_of":"2026-10-15"},"AZ":{"state":"Arizona","filing_office":"Arizona Corporation Commission (Corporations Division)","form_name":"Articles of Incorporation (Nonprofit Corporation)","filing_fee":40,"filing_fee_note":"File online via eCorp (ecorp.azcc.gov) or by mail; a Certificate of Disclosure is also required; expedited +$35, next-day +$100, same-day +$200, two-hour +$400","registered_agent_rule":"Required — Arizona calls it a statutory agent; must have an Arizona street address and sign acceptance of the appointment","registered_agent_required":true,"min_directors":1,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"Due each year in your anniversary month, on the date the ACC assigns (shown in the Arizona Business Center)","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required for general charities — only charities soliciting for veterans register with the AZ Secretary of State (no fee)","publication_required":true,"verified_as_of":"2026-10-15"},"CA":{"state":"California","filing_office":"California Secretary of State","form_name":"Articles of Incorporation of a Nonprofit Public Benefit Corporation (Form ARTS-PB-501(c)(3))","filing_fee":30,"filing_fee_note":"File on paper — the Secretary of State's online portal only accepts nonprofit mutual benefit articles; the ARTS-PB-501(c)(3) form already carries the IRS-required purpose and dissolution clauses; $15 special handling fee for in-person drop-off","registered_agent_rule":"Required (Agent for Service of Process); must be a California resident individual or a CA-authorized corporation with a California street address","registered_agent_required":true,"min_directors":1,"annual_report_fee":20,"annual_report_frequency":"Biennial","annual_report_due":"Statement of Information (Form SI-100) due within 90 days of incorporation, then every 2 years for nonprofit corporations; $20 per filing","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the CA Attorney General's Registry of Charities and Fundraisers (Form CT-1, $50 initial fee) within 30 days of receiving charitable assets, BEFORE soliciting; annual renewal report (RRF-1) with a revenue-based fee of $25–$1,200","publication_required":false,"verified_as_of":"2026-10-15"},"CO":{"state":"Colorado","filing_office":"Colorado Secretary of State","form_name":"Articles of Incorporation (Nonprofit Corporation)","filing_fee":50,"filing_fee_note":"Online only — no paper option; attach your IRS-required 501(c)(3) purpose and dissolution language (up to 5 files, 10MB)","registered_agent_rule":"Required; must have a Colorado physical street address; you may serve as your own agent but the address is public record","registered_agent_required":true,"min_directors":1,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"Periodic Report due in the window from 2 months before through 2 months after your anniversary month; $50 late penalty on top of the $25 fee","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the CO Secretary of State (Charity Registration, about $10/year) BEFORE soliciting donations; registration is valid until your required financial report is due","publication_required":false,"verified_as_of":"2026-10-15"},"CT":{"state":"Connecticut","filing_office":"Connecticut Secretary of the State, Business Services Division","form_name":"Certificate of Incorporation (Nonstock Corporation)","filing_fee":50,"filing_fee_note":"File online at business.ct.gov or by mail; add IRS-required 501(c)(3) purpose and dissolution language to the certificate. Also file an Organization and First Report within 90 days of incorporation ($50 for nonstock)","registered_agent_rule":"Required; appointed in the certificate, with a Connecticut street address","registered_agent_required":true,"min_directors":3,"annual_report_fee":50,"annual_report_frequency":"Annual","annual_report_due":"Each year by the end of the corporation's anniversary month; file online at business.ct.gov","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the CT Dept. of Consumer Protection, Public Charities Unit ($50/yr) BEFORE any solicitation; registration expires the last day of the 11th month after your fiscal year end","publication_required":false,"verified_as_of":"2026-10-15"},"DC":{"state":"District of Columbia","filing_office":"DC Department of Licensing and Consumer Protection (DLCP), Corporations Division","form_name":"Articles of Incorporation of Domestic Nonprofit Corporation (Form DNP-1)","filing_fee":80,"filing_fee_note":"Online filers can add the IRS-required 501(c)(3) purpose and dissolution language in the Miscellaneous Provisions field or upload their own complete articles; +$100 same-day or +$50 3-day expedited service","registered_agent_rule":"Required; must have a District of Columbia street address where the agent can receive service of process","registered_agent_required":true,"min_directors":3,"annual_report_fee":80,"annual_report_frequency":"Biennial (every 2 years)","annual_report_due":"April 1 of the year following registration, then every other April 1 ($50 late fee)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Obtain a Charitable Solicitation license from DLCP BEFORE soliciting (DC Code §44-1703 bars solicitation without a valid certificate of registration); 2-year license $99 or 4-year license $198","publication_required":false,"verified_as_of":"2026-10-15"},"DE":{"state":"Delaware","filing_office":"Delaware Secretary of State, Division of Corporations","form_name":"Certificate of Incorporation (Non-Stock Corporation)","filing_fee":89,"filing_fee_note":"Fee covers a 1-page certificate; $9 per additional page. File as an 'exempt' nonstock corporation and include the IRS-required 501(c)(3) purpose and dissolution clauses in the certificate. Expedited service available for an additional fee","registered_agent_rule":"Required; must have a Delaware street address (no PO box); an individual Delaware resident or an entity authorized to do business in Delaware","registered_agent_required":true,"min_directors":1,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"March 1 each year (annual franchise tax report for exempt corporations)","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — Delaware has no charitable solicitation registration program for charities","publication_required":false,"verified_as_of":"2026-10-15"},"FL":{"state":"Florida","filing_office":"Florida Department of State, Division of Corporations (Sunbiz)","form_name":"Articles of Incorporation — Florida Not For Profit Corporation","filing_fee":70,"filing_fee_note":"$35 filing fee + $35 registered agent designation = $70 total; include the IRS 501(c)(3) purpose and dissolution clauses in the articles","registered_agent_rule":"Required; must have a Florida street address (no PO box); the agent must formally accept the designation in the articles","registered_agent_required":true,"min_directors":3,"annual_report_fee":61.25,"annual_report_frequency":"Annual","annual_report_due":"January 1 through May 1 each year, starting the year after registration; $400 late penalty if filed after May 1","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the FL Dept. of Agriculture and Consumer Services BEFORE soliciting (Solicitation of Contributions registration; annual fee $10-$400 based on contributions)","publication_required":false,"verified_as_of":"2026-10-15"},"GA":{"state":"Georgia","filing_office":"Georgia Secretary of State, Corporations Division","form_name":"Articles of Incorporation + Transmittal Information Form (Form 227)","filing_fee":100,"filing_fee_note":"The state's template articles do NOT include IRS 501(c)(3) language — add your own purpose and dissolution clauses to the articles before filing; mail original + copy with Form 227","registered_agent_rule":"Required; must have a Georgia street address (no PO box); an individual Georgia resident or an entity authorized to do business in Georgia","registered_agent_required":true,"min_directors":1,"annual_report_fee":30,"annual_report_frequency":"Annual","annual_report_due":"Initial annual registration within 90 days of incorporation; then January 1 through April 1 each year ($30 for nonprofit corporations)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the GA Secretary of State (Charitable Organization Registration, Form C-100) BEFORE soliciting; $35 annual fee with yearly renewal","publication_required":true,"verified_as_of":"2026-10-15"},"HI":{"state":"Hawaii","filing_office":"Hawaii Department of Commerce and Consumer Affairs, Business Registration Division (BREG)","form_name":"Articles of Incorporation (Domestic Nonprofit Corporation)","filing_fee":50,"filing_fee_note":"File online via Hawaiʻi Business Express; $25 special-handling fee available for faster review","registered_agent_rule":"Required; must have a Hawaii street address; individual resident, domestic entity, or authorized foreign entity (a domestic corporation cannot be its own agent)","registered_agent_required":true,"min_directors":3,"annual_report_fee":2.5,"annual_report_frequency":"Annual","annual_report_due":"Form DNP annual report due each year during the quarter containing your registration anniversary ($2.50 online, $5 by mail; $10 late fee per year delinquent)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the HI Attorney General (Charity Registration, no fee) BEFORE soliciting; file annual financial reports by the 15th day of the 5th month after your fiscal year ends","publication_required":false,"verified_as_of":"2026-10-15"},"IA":{"state":"Iowa","filing_office":"Iowa Secretary of State","form_name":"Articles of Incorporation (file online via Fast Track Filing or by mail)","filing_fee":20,"filing_fee_note":"Iowa does not add the IRS-required 501(c)(3) purpose and dissolution language for you — write it into your articles before filing","registered_agent_rule":"Required; must have an Iowa street address (no PO box)","registered_agent_required":true,"min_directors":1,"annual_report_fee":0,"annual_report_frequency":"Biennial","annual_report_due":"Due by March 31 of each odd-numbered year; nonprofits pay no fee for the report","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — Iowa has no charitable solicitation registration; the Attorney General enforces fraud laws","publication_required":false,"verified_as_of":"2026-10-15"},"ID":{"state":"Idaho","filing_office":"Idaho Secretary of State","form_name":"Articles of Incorporation (Nonprofit Corporation)","filing_fee":30,"filing_fee_note":"$30 online via SOSBiz, $50 by mail or in person (must be typed — no handwritten filings); expedited service adds $40, same-day adds $100","registered_agent_rule":"Required; must have an Idaho street address; individual resident or authorized entity","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"Due annually by the last day of your anniversary month; no fee to file","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — Idaho has no charitable solicitation registration law","publication_required":false,"verified_as_of":"2026-10-15"},"IL":{"state":"Illinois","filing_office":"Illinois Secretary of State","form_name":"Articles of Incorporation (Form NFP 102.10)","filing_fee":50,"filing_fee_note":"File on paper (not online) to include the IRS-required 501(c)(3) purpose and dissolution clauses","registered_agent_rule":"Required; must have an Illinois street address (no PO box); individual resident or authorized entity","registered_agent_required":true,"min_directors":3,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"Before the first day of the anniversary month of incorporation","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the IL Attorney General (Form CO-1, $15) BEFORE soliciting donations","publication_required":false,"verified_as_of":"2026-10-15"},"IN":{"state":"Indiana","filing_office":"Indiana Secretary of State, Business Services Division","form_name":"Articles of Incorporation — Domestic Nonprofit Corporation (State Form 4162)","filing_fee":30,"filing_fee_note":"Online via INBiz: $20 filing fee + $10 access fee; $50 by mail (fee shown on the official State Form 4162). Attach your IRS-required 501(c)(3) purpose/dissolution language before filing","registered_agent_rule":"Required; must have an Indiana street address (no PO box); individual Indiana resident or entity authorized in Indiana","registered_agent_required":true,"min_directors":3,"annual_report_fee":22,"annual_report_frequency":"Biennial (Business Entity Report, every 2 years — not annual)","annual_report_due":"First due two years after formation, then every other year, by the end of the anniversary month of formation","charitable_solicitation_required":false,"charitable_solicitation_detail":"Indiana does NOT require charities to register for solicitation — only professional solicitors register with the IN Attorney General","publication_required":false,"verified_as_of":"2026-10-15"},"KS":{"state":"Kansas","filing_office":"Kansas Secretary of State","form_name":"Articles of Incorporation — Domestic (Kansas) Corporation (Form AI)","filing_fee":20,"filing_fee_note":"File online or by mail — $20 either way; the form does not include IRS 501(c)(3) language, so add purpose and dissolution clauses yourself","registered_agent_rule":"Required — Kansas calls it a resident agent; must have a Kansas street address (no PO box)","registered_agent_required":true,"min_directors":1,"annual_report_fee":40,"annual_report_frequency":"Annual","annual_report_due":"On the 15th day of the 6th month after the end of the organization's fiscal year (June 15 for calendar-year filers)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the KS Secretary of State (Charitable Organization Registration, Form 67-01, $25) BEFORE soliciting; renew annually by the last day of the 6th month after your fiscal year ends","publication_required":false,"verified_as_of":"2026-10-15"},"KY":{"state":"Kentucky","filing_office":"Kentucky Secretary of State","form_name":"Articles of Incorporation for Nonprofit Corporation (Form NAI)","filing_fee":8,"filing_fee_note":"File on paper (or confirm attachment upload before filing online) — the form has no dissolution section, so attach the IRS-required purpose and dissolution clauses on a separate page","registered_agent_rule":"Required; must have a Kentucky street address (no PO box); individual resident or business entity authorized in Kentucky","registered_agent_required":true,"min_directors":3,"annual_report_fee":15,"annual_report_frequency":"Annual","annual_report_due":"January 1 through June 30 each year, starting the year after formation","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the KY Attorney General (no fee) before asking for donations","publication_required":false,"verified_as_of":"2026-10-15"},"LA":{"state":"Louisiana","filing_office":"Louisiana Secretary of State","form_name":"Articles of Incorporation for Nonprofit Corporation","filing_fee":75,"filing_fee_note":"File through geauxBIZ or by mail; the form lacks the IRS-required 501(c)(3) clauses, so add purpose and dissolution language — expedite available: $30 for 24-hour or $50 for priority 2-4 hour processing, plus a $5 credit card convenience fee","registered_agent_rule":"Required; must have a Louisiana physical address; individual resident or business entity authorized in Louisiana, and the agent must sign an acceptance affidavit","registered_agent_required":true,"min_directors":3,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"By the anniversary date of incorporation each year","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the LA Secretary of State ($25) before soliciting; renew annually by the date of initial registration (religious and educational organizations are exempt)","publication_required":false,"verified_as_of":"2026-10-15"},"MA":{"state":"Massachusetts","filing_office":"Massachusetts Secretary of the Commonwealth, Corporations Division","form_name":"Articles of Organization (MGL Chapter 180)","filing_fee":35,"filing_fee_note":"File online or by mail; include IRS-required 501(c)(3) purpose and dissolution language in the articles","registered_agent_rule":"Required (called resident agent); must have a Massachusetts street address","registered_agent_required":true,"min_directors":1,"annual_report_fee":15,"annual_report_frequency":"Annual","annual_report_due":"On or before November 1 each year","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the MA Attorney General's Non-Profit Organizations/Public Charities Division ($100 one-time) BEFORE operating or fundraising; file Form PC annually (fee from $35, based on revenue) within 4.5 months after fiscal year end; obtain a Certificate for Solicitation before soliciting","publication_required":false,"verified_as_of":"2026-10-15"},"MD":{"state":"Maryland","filing_office":"Maryland State Department of Assessments and Taxation (SDAT)","form_name":"Articles of Incorporation for a Tax-Exempt Nonstock Corporation","filing_fee":170,"filing_fee_note":"Total is $100 filing fee + $20 organization and capitalization fee + $50 Maryland Not-For-Profit Development Center assessment. The form already carries the 501(c)(3) provisions. A $50 expedite fee is required for online, fax, or in-person filing (regular mail without expedite can take 10+ weeks)","registered_agent_rule":"Required (called 'resident agent'); must be a Maryland citizen with a Maryland street address or a Maryland entity, and must sign the articles","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"April 15 each year — file the Annual Report / Personal Property Tax Return with SDAT; nonstock corporations owe no filing fee","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the MD Secretary of State, Charitable Organizations Division (Form COR-92) BEFORE soliciting; annual fee $0-$300 based on contributions (organizations raising under $25,000 without a professional solicitor may be exempt)","publication_required":false,"verified_as_of":"2026-10-15"},"ME":{"state":"Maine","filing_office":"Maine Secretary of State, Division of Corporations, UCC and Commissions","form_name":"Articles of Incorporation (Form MNPCA-6)","filing_fee":40,"filing_fee_note":"File on paper by mail (not online); write IRS-required 501(c)(3) purpose and dissolution language as attachments and check the Article 8 box. Optional expedite: +$50 for 24-hour or +$100 for same-day service","registered_agent_rule":"Required; commercial or noncommercial agent with a Maine street address (no PO box)","registered_agent_required":true,"min_directors":3,"annual_report_fee":35,"annual_report_frequency":"Annual","annual_report_due":"By June 1 each year","charitable_solicitation_required":true,"charitable_solicitation_detail":"License with the Maine Dept. of Professional and Financial Regulation, Office of Professional and Occupational Regulation ($25/yr) at least 30 days BEFORE soliciting; renew the license annually","publication_required":false,"verified_as_of":"2026-10-15"},"MI":{"state":"Michigan","filing_office":"Michigan Dept. of Licensing and Regulatory Affairs (LARA), Corporations, Securities & Commercial Licensing Bureau","form_name":"Articles of Incorporation (Form CSCL/CD-502)","filing_fee":20,"filing_fee_note":"$10 filing fee + $10 franchise fee, verified on the official LARA fee schedule; expedited service available for an extra fee (e.g., $50 for 24-hour formation filings)","registered_agent_rule":"Required; must have a Michigan street address (no PO box); individual Michigan resident or entity authorized in Michigan","registered_agent_required":true,"min_directors":3,"annual_report_fee":20,"annual_report_frequency":"Annual","annual_report_due":"By October 1 each year (Form CSCL/CD-2000); online filing opens June 15","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the MI Attorney General (Form CTS-01, \"License to Solicit\") BEFORE soliciting once you receive over $25,000/year in contributions or pay anyone for fundraising; registration is effective on receipt","publication_required":false,"verified_as_of":"2026-10-15"},"MN":{"state":"Minnesota","filing_office":"Minnesota Secretary of State","form_name":"Articles of Incorporation — Nonprofit Corporation (Minnesota Statutes, Chapter 317A)","filing_fee":70,"filing_fee_note":"Reported as $70 by mail, $90 in-person/online (expedited); the state form CANNOT be used for a 501(c)(3) — attach custom articles containing the IRS-required purpose and dissolution clauses","registered_agent_rule":"Required; must maintain a registered office with a Minnesota street address (no PO box alone); individual Minnesota resident or entity authorized in Minnesota","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"Free Annual Renewal filed each calendar year by December 31","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the MN Attorney General ($25, Charitable Organization Initial Registration form) BEFORE soliciting if you raise over $25,000/year or use paid fundraisers; file an annual report ($25) by the 15th day of the 7th month after fiscal year-end","publication_required":false,"verified_as_of":"2026-10-15"},"MO":{"state":"Missouri","filing_office":"Missouri Secretary of State","form_name":"Articles of Incorporation of a Nonprofit Corporation (Form CORP 52)","filing_fee":25,"filing_fee_note":"File on paper with original signatures — the official form requires it","registered_agent_rule":"Required; must have a Missouri street address (no PO box)","registered_agent_required":true,"min_directors":3,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"By the end of the anniversary month of incorporation ($10 online / $15 paper; late reports add $15 per 30 days; a biennial option exists)","charitable_solicitation_required":false,"charitable_solicitation_detail":"501(c)(3), (c)(7), and (c)(8) organizations are automatically exempt from charity registration (MO Attorney General); professional fundraisers must register separately ($50)","publication_required":false,"verified_as_of":"2026-10-15"},"MS":{"state":"Mississippi","filing_office":"Mississippi Secretary of State","form_name":"Articles of Incorporation (Form F0001)","filing_fee":50,"filing_fee_note":"File online only through the Secretary of State's Business Forms Online portal; attach the IRS-required purpose and dissolution clauses in the attachments step","registered_agent_rule":"Required; must have a Mississippi street address; individual resident or business entity authorized in Mississippi","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"File online between January 1 and May 15 each year","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register online with the MS Secretary of State, Charities Division ($50/year) before soliciting; renew annually","publication_required":false,"verified_as_of":"2026-10-15"},"MT":{"state":"Montana","filing_office":"Montana Secretary of State","form_name":"Articles of Incorporation (Domestic Nonprofit Corporation)","filing_fee":20,"filing_fee_note":"File online only through the SOS Online Business Services portal (biz.sosmt.gov) — paper not accepted for this form; 24-hour review adds $20, 1-hour adds $100","registered_agent_rule":"Required; must have a Montana street address (no PO box); individual resident or authorized entity","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"Due annually by April 15; free if filed on time, $35 late fee after April 15","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — Montana has no charitable solicitation registration law","publication_required":false,"verified_as_of":"2026-10-15"},"NC":{"state":"North Carolina","filing_office":"North Carolina Secretary of State, Business Registration Division","form_name":"Articles of Incorporation for Nonprofit Corporation (Form N-01)","filing_fee":60,"filing_fee_note":"Online filing adds $2 by ACH or $3 by card. Attach the 501(c)(3) purpose and dissolution provisions — confirm with the Division how to add the attachment when filing online. Expedited: +$100 for 24-hour or +$200 for same-day processing","registered_agent_rule":"Required; must have a North Carolina street address (no PO box); an individual NC resident or an entity authorized to do business in NC","registered_agent_required":true,"min_directors":1,"annual_report_fee":0,"annual_report_frequency":"None","annual_report_due":"No annual report required for NC nonprofit corporations — unlike most states, NC does not require one; licensed charities file annual financial reports through their solicitation renewal instead","charitable_solicitation_required":true,"charitable_solicitation_detail":"Obtain a license from the NC Secretary of State, Charitable Solicitation Licensing Division BEFORE soliciting (Initial/Renewal License Application for Charities; fee $0-$200 based on prior-year contributions; organizations receiving under $25,000 without paid solicitors may be exempt)","publication_required":false,"verified_as_of":"2026-10-15"},"ND":{"state":"North Dakota","filing_office":"North Dakota Secretary of State","form_name":"Nonprofit Corporation Articles of Incorporation (Form SFN 13003)","filing_fee":40,"filing_fee_note":"File online through the FirstStop portal, or mail/fax self-drafted articles — add the IRS-required 501(c)(3) purpose and dissolution clauses, since the online form only covers state-law provisions","registered_agent_rule":"Required; must have a North Dakota street address (no PO box)","registered_agent_required":true,"min_directors":3,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"February 1 each year ($5 late fee; dissolution risk if a year late)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the ND Secretary of State (Charitable Organization Registration Statement, $25) BEFORE soliciting; file a separate $10 Charitable Organization Annual Report by September 1 each year","publication_required":false,"verified_as_of":"2026-10-15"},"NE":{"state":"Nebraska","filing_office":"Nebraska Secretary of State","form_name":"Articles of Incorporation (Domestic Nonprofit Corporation)","filing_fee":25,"filing_fee_note":"$25 online; $30 if filed in-office/paper","registered_agent_rule":"Required; must have a Nebraska street address (no PO box)","registered_agent_required":true,"min_directors":3,"annual_report_fee":25,"annual_report_frequency":"Biennial","annual_report_due":"By April 1 of each odd-numbered year ($25 online / $30 paper; delinquent June 16 — failure to file leads to administrative dissolution)","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — Nebraska does not register charitable organizations","publication_required":true,"verified_as_of":"2026-10-15"},"NH":{"state":"New Hampshire","filing_office":"New Hampshire Secretary of State, Corporation Division","form_name":"Articles of Agreement (Form NP-1)","filing_fee":25,"filing_fee_note":"File online via NH QuickStart or by mail; $25 state fee (+$2 online). Write 501(c)(3) purpose language in Article SECOND and dissolution language in Article FOURTH. Also record a copy with the town/city clerk (small local fee)","registered_agent_rule":"Not required for domestic nonprofits — the corporation's principal address is used; you may optionally appoint an agent for service of process","registered_agent_required":false,"min_directors":5,"annual_report_fee":25,"annual_report_frequency":"Every 5 years","annual_report_due":"By December 31 in years ending in 0 or 5 (next due December 31, 2030)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register one-time with the NH Attorney General Charitable Trusts Unit BEFORE soliciting (initial fee reported as $25 — verify); then file annual report (Form NHCT-12, $75) within 4 months 15 days after fiscal year end (May 15 for calendar-year filers)","publication_required":false,"verified_as_of":"2026-10-15"},"NJ":{"state":"New Jersey","filing_office":"New Jersey Dept. of the Treasury, Division of Revenue and Enterprise Services (DORES)","form_name":"Certificate of Incorporation (Nonprofit)","filing_fee":75,"filing_fee_note":"File online with DORES or by mail; write IRS-required 501(c)(3) purpose and dissolution language before filing; +$15 expedite, +$25 certified copy","registered_agent_rule":"Required; must have a New Jersey street address","registered_agent_required":true,"min_directors":3,"annual_report_fee":30,"annual_report_frequency":"Annual","annual_report_due":"By the last day of the anniversary month of incorporation each year","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the NJ Division of Consumer Affairs, Charities Registration Section BEFORE soliciting; renew annually within 6 months after fiscal year end (small charities use Form CRI-200, $30; larger use CRI-300R, $60–$250 by contributions)","publication_required":false,"verified_as_of":"2026-10-15"},"NM":{"state":"New Mexico","filing_office":"New Mexico Secretary of State","form_name":"Articles of Incorporation (Nonprofit Corporation)","filing_fee":25,"filing_fee_note":"Online only via the SOS Enterprise portal; $25 statutory fee plus a small payment-processing charge","registered_agent_rule":"Required; must have a New Mexico physical street address (no PO box); the agent must accept the appointment","registered_agent_required":true,"min_directors":3,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"File an Initial Report within 30 days of incorporation, then file the Annual Nonprofit Corporate Report each year by the 15th day of the 5th month after your fiscal year ends ($10; $10 late penalty)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the NM Attorney General (Charity Registration, no fee) BEFORE soliciting donations; renew annually — due the end of the month in which your IRS Form 990 is due","publication_required":false,"verified_as_of":"2026-10-15"},"NV":{"state":"Nevada","filing_office":"Nevada Secretary of State","form_name":"Articles of Incorporation (Nonprofit Corporation, NRS 82)","filing_fee":50,"filing_fee_note":"File online via SilverFlume; $50 articles + $50 initial list of officers/directors ($100 total to start); 24-hour expedite adds $125","registered_agent_rule":"Required; must have a Nevada street address and be available during business hours to accept legal papers","registered_agent_required":true,"min_directors":1,"annual_report_fee":50,"annual_report_frequency":"Annual","annual_report_due":"Annual List of Officers and Directors due each year by the last day of your anniversary month ($50); late filings add $75","charitable_solicitation_required":true,"charitable_solicitation_detail":"Required since 2014 (NRS 82A) — register with the NV Secretary of State (Charitable Solicitation Registration Statement + Form 990, filed with your initial or annual list) BEFORE soliciting donations","publication_required":false,"verified_as_of":"2026-10-15"},"NY":{"state":"New York","filing_office":"New York Department of State, Division of Corporations","form_name":"Certificate of Incorporation (Not-for-Profit)","filing_fee":75,"filing_fee_note":"File with the Dept. of State; the DOS sample form (1511-f) lacks IRS language — add 501(c)(3) purpose and dissolution clauses","registered_agent_rule":"No separate registered agent required — the Secretary of State is your statutory agent for service of process; list a NY forwarding address (with county) in the certificate","registered_agent_required":false,"min_directors":3,"annual_report_fee":9,"annual_report_frequency":"Biennial","annual_report_due":"Every 2 years in the calendar month the certificate was filed (Biennial Statement)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the NY Attorney General Charities Bureau (Form CHAR410, $25) BEFORE soliciting; file Form CHAR500 annually (fees scale with revenue), due 4.5 months after fiscal year end (May 15 for calendar-year filers)","publication_required":false,"verified_as_of":"2026-10-15"},"OH":{"state":"Ohio","filing_office":"Ohio Secretary of State","form_name":"Initial Articles of Incorporation (Form 532B)","filing_fee":99,"filing_fee_note":"File online via Ohio Business Central or by mail; fee verified on the official SOS fee schedule (10/24 revision). Expedited processing adds $100","registered_agent_rule":"Required (Ohio calls it a \"statutory agent\"); must have an Ohio street address (no PO box); individual Ohio resident or entity authorized in Ohio","registered_agent_required":true,"min_directors":3,"annual_report_fee":25,"annual_report_frequency":"Every 5 years (no annual report; Ohio uses a Statement of Continued Existence instead)","annual_report_due":"Once every five years, based on the incorporation date or the last corporate filing (Form 522)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the OH Attorney General (Charitable Trust Act + Charitable Organizations Act, $0-$200 based on assets/contributions) BEFORE soliciting donations","publication_required":false,"verified_as_of":"2026-10-15"},"OK":{"state":"Oklahoma","filing_office":"Oklahoma Secretary of State","form_name":"Certificate of Incorporation (Form 0008, Not for Profit Corporation)","filing_fee":25,"filing_fee_note":"File online, by mail, or in person; the form has no dissolution section, so attach the IRS-required asset-dedication clause — card payments add 4%, and in-person same-day delivery adds $25 per document","registered_agent_rule":"Required; must have an Oklahoma street address (no PO box); the corporation itself, an individual resident, or a domestic or Oklahoma-qualified entity","registered_agent_required":true,"min_directors":3,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"File the Annual Certificate by the anniversary date of incorporation each year","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register annually with the OK Secretary of State ($15/year) before soliciting donations","publication_required":false,"verified_as_of":"2026-10-15"},"OR":{"state":"Oregon","filing_office":"Oregon Secretary of State, Corporation Division","form_name":"Articles of Incorporation — Nonprofit Corporation","filing_fee":50,"filing_fee_note":"File online through the Oregon Business Registry or by mail/fax; the form's optional-provisions section is where you add the IRS 501(c)(3) purpose and dissolution language (no paper-only requirement)","registered_agent_rule":"Required; must be an individual or entity with an Oregon street address where legal documents can be accepted","registered_agent_required":true,"min_directors":3,"annual_report_fee":50,"annual_report_frequency":"Annual","annual_report_due":"Due each year on the anniversary date of incorporation (the state mails a renewal notice about 45 days ahead)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the Oregon Department of Justice, Charitable Activities Section, BEFORE soliciting (initial registration previously reported as no fee; annual financial report CT-12F required); fee schedule unverified on the official site","publication_required":false,"verified_as_of":"2026-10-15"},"PA":{"state":"Pennsylvania","filing_office":"Pennsylvania Department of State, Bureau of Corporations and Charitable Organizations","form_name":"Articles of Incorporation — Domestic Nonprofit Corporation (Form DSCB:15-5306)","filing_fee":125,"filing_fee_note":"File online via the Business One-Stop Hub or by mail; add IRS-required 501(c)(3) purpose and dissolution language (the state form does not include it). Expedited review: +$100 same-day, +$300 3-hour, +$1,000 1-hour (online only)","registered_agent_rule":"Must maintain a registered office with a Pennsylvania street address (a commercial registered office provider may serve)","registered_agent_required":true,"min_directors":1,"annual_report_fee":0,"annual_report_frequency":"Annual","annual_report_due":"January 1–June 30 each year (required since 2025; fee waived for nonprofits)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the PA Dept. of State, Bureau of Corporations and Charitable Organizations (Form BCO-10, $15–$250/yr by contributions) BEFORE soliciting; renew annually by the 15th day of the 5th month after fiscal year end (May 15 for calendar-year filers)","publication_required":true,"verified_as_of":"2026-10-15"},"RI":{"state":"Rhode Island","filing_office":"Rhode Island Secretary of State, Division of Business Services","form_name":"Articles of Incorporation","filing_fee":35,"filing_fee_note":"File online via business.sos.ri.gov or by mail; $35 paper / $37.50 online; include IRS-required 501(c)(3) purpose and dissolution language","registered_agent_rule":"Required; must maintain a Rhode Island address","registered_agent_required":true,"min_directors":3,"annual_report_fee":20,"annual_report_frequency":"Annual","annual_report_due":"June 1–June 30 each year (Non-Profit Corporation Annual Report; $25 late penalty)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the RI Dept. of Business Regulation, Securities Division (Charities Section) BEFORE soliciting; renew annually on your registration anniversary (fee reported ~$93 — verify with DBR)","publication_required":false,"verified_as_of":"2026-10-15"},"SC":{"state":"South Carolina","filing_office":"South Carolina Secretary of State, Division of Business Filings","form_name":"Articles of Incorporation — Nonprofit Corporation (S.C. Code §33-31-202)","filing_fee":25,"filing_fee_note":"Attach the free 501(c)(3) Attachment if you will seek 501(c)(3) status (required IRS purpose/dissolution language); file the original plus one copy with a self-addressed stamped envelope","registered_agent_rule":"Required; must have a South Carolina street address where the agent can receive legal documents","registered_agent_required":true,"min_directors":3,"annual_report_fee":0,"annual_report_frequency":"None","annual_report_due":"South Carolina does not require nonprofit corporations to file an annual corporate report; registered charities file an annual financial report with the SOS Public Charities Division instead","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the SC Secretary of State, Public Charities Division BEFORE soliciting (Registration Statement; $50 annual fee with annual renewal and financial report)","publication_required":false,"verified_as_of":"2026-10-15"},"SD":{"state":"South Dakota","filing_office":"South Dakota Secretary of State","form_name":"Articles of Incorporation for a Domestic Nonprofit Corporation","filing_fee":30,"filing_fee_note":"File online or by mail; use Article X of the form to include the IRS-required 501(c)(3) purpose and dissolution provisions","registered_agent_rule":"Required; must have a South Dakota street address (no PO box)","registered_agent_required":true,"min_directors":3,"annual_report_fee":10,"annual_report_frequency":"Annual","annual_report_due":"By the 1st day of the anniversary month of incorporation ($55 late penalty)","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — SD has no charity registration; only paid solicitors must register and bond with the AG's Division of Consumer Protection","publication_required":false,"verified_as_of":"2026-10-15"},"TN":{"state":"Tennessee","filing_office":"Tennessee Secretary of State","form_name":"Charter for Nonprofit Corporation (Form SS-4418)","filing_fee":100,"filing_fee_note":"Payable online, by mail, or in person; add the IRS-required purpose and dissolution language in the charter's provisions sections (online filers should confirm how to add attachment pages)","registered_agent_rule":"Required; must have a Tennessee street address; individual resident or entity authorized to transact business in Tennessee","registered_agent_required":true,"min_directors":3,"annual_report_fee":20,"annual_report_frequency":"Annual","annual_report_due":"On or before the first day of the 4th month following the close of the fiscal year (e.g., April 1 for calendar-year filers)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register online with the TN Secretary of State, Division of Charitable Solicitations and Gaming, BEFORE soliciting ($50 initial; renewals $100-$300 based on receipts). Charities receiving $50,000 or less from the public file a free annual exemption request instead","publication_required":false,"verified_as_of":"2026-10-15"},"TX":{"state":"Texas","filing_office":"Texas Secretary of State","form_name":"Certificate of Formation — Nonprofit Corporation (Form 202)","filing_fee":25,"filing_fee_note":"File by mail (in duplicate), in person, or electronically via SOSUpload; the form requires listing initial directors and leaves room for the IRS-required purpose and dissolution provisions — credit card payments add a statutory convenience fee","registered_agent_rule":"Required; must have a Texas street address; individual Texas resident or business entity authorized to transact business in Texas","registered_agent_required":true,"min_directors":3,"annual_report_fee":5,"annual_report_frequency":"Every 4 years","annual_report_due":"File the Periodic Report (Form 802) by the anniversary date of the 4th year after formation, then every 4 years","charitable_solicitation_required":false,"charitable_solicitation_detail":"Texas does not require general charity registration — only public-safety organizations and veterans' groups register with the Secretary of State","publication_required":false,"verified_as_of":"2026-10-15"},"UT":{"state":"Utah","filing_office":"Utah Division of Corporations and Commercial Code (Dept. of Commerce)","form_name":"Articles of Incorporation (Nonprofit)","filing_fee":59,"filing_fee_note":"File online via the Utah Business Registration System or by mail; expedited processing adds $75","registered_agent_rule":"Required; must have a Utah street address (PO box allowed only in addition to the street address); individual resident or commercial registered agent","registered_agent_required":true,"min_directors":3,"annual_report_fee":18,"annual_report_frequency":"Annual","annual_report_due":"Annual renewal due by the last day of your anniversary month ($18; $10 late fee)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the UT Division of Consumer Protection (Charitable Organization Permit, $100/year) BEFORE soliciting; renew annually — permits run October 1 to September 30","publication_required":false,"verified_as_of":"2026-10-15"},"VA":{"state":"Virginia","filing_office":"Virginia State Corporation Commission (SCC), Clerk's Office","form_name":"Articles of Incorporation of a Virginia Nonstock Corporation (Form SCC819)","filing_fee":75,"filing_fee_note":"Form SCC819 has no section for purpose or dissolution — attach the IRS-required 501(c)(3) purpose and dissolution clauses on a separate page before filing; file online or by mail; expedited processing available for an additional fee","registered_agent_rule":"Required; must have a Virginia street address (no PO box); an individual Virginia resident or an entity authorized to do business in Virginia","registered_agent_required":true,"min_directors":1,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"Last day of the anniversary month of incorporation each year (Annual Report + $25 registration fee via the Annual Assessment Packet mailed to the registered agent)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the VA Dept. of Agriculture and Consumer Services, Office of Charitable and Regulatory Programs (Form 102) BEFORE soliciting — solicitation without registration is unlawful; $100 initial fee; annual renewal fee $30-$325 based on prior-year contributions, due the 15th day of the 5th month after fiscal year end","publication_required":false,"verified_as_of":"2026-10-15"},"VT":{"state":"Vermont","filing_office":"Vermont Secretary of State, Corporations Division","form_name":"Articles of Incorporation (Domestic Nonprofit Corporation)","filing_fee":155,"filing_fee_note":"File online via bizfilings.vermont.gov (paper accepted by mail); add IRS-required 501(c)(3) purpose and dissolution language to the articles","registered_agent_rule":"Required; must have a Vermont street address (no PO box)","registered_agent_required":true,"min_directors":3,"annual_report_fee":35,"annual_report_frequency":"Biennial","annual_report_due":"Every 2 years between January 1 and April 1, starting the year after incorporation ($35 if any officer/director is compensated; free if none are)","charitable_solicitation_required":false,"charitable_solicitation_detail":"No charity registration — only paid fundraisers must file a solicitation notice with the VT Attorney General before each campaign","publication_required":false,"verified_as_of":"2026-10-15"},"WA":{"state":"Washington","filing_office":"Washington Secretary of State, Corporations & Charities Division","form_name":"Articles of Incorporation — Washington Nonprofit Corporation","filing_fee":80,"filing_fee_note":"$40 if you certify initial-year gross revenue under $500,000; online filing through CCFS adds $20 ($60/$100); expedited processing +$100 (3 business days) or +$150 (same-day)","registered_agent_rule":"Required; must be an individual or entity with a Washington physical street address (no PO box), and the registered agent's signed consent must accompany the filing","registered_agent_required":true,"min_directors":3,"annual_report_fee":60,"annual_report_frequency":"Annual","annual_report_due":"Due by the last day of the anniversary month of formation each year; fee drops to $20 if you certify gross revenue under $500,000 in the most recent fiscal year","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the Secretary of State's Charities Program (Charitable Organization Registration) BEFORE soliciting; fee schedule unverified on the official site — older sources show $20 initial / $10 annual renewal","publication_required":false,"verified_as_of":"2026-10-15"},"WI":{"state":"Wisconsin","filing_office":"Wisconsin Dept. of Financial Institutions (DFI)","form_name":"Nonstock Corporation Articles of Incorporation (Form 102)","filing_fee":35,"filing_fee_note":"Fee confirmed on the official DFI Form 102 page; optional expedited service adds $25. Attach IRS-required 501(c)(3) purpose, activity-limitation, and dissolution clauses — the state form does not include them","registered_agent_rule":"Required; must have a Wisconsin street address (no PO box); individual Wisconsin resident or entity authorized in Wisconsin","registered_agent_required":true,"min_directors":3,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"Each year during the calendar quarter of the corporation's anniversary month (fee reported as $25 online / $40 paper)","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with WI DFI (Form #296, $15) BEFORE soliciting; file an annual Charitable Organization Annual Report (Form #308, fee varies by gross revenue) by the 15th day of the 5th month after fiscal year-end","publication_required":false,"verified_as_of":"2026-10-15"},"WV":{"state":"West Virginia","filing_office":"West Virginia Secretary of State, Business and Licensing Division","form_name":"Articles of Incorporation (Form CD-1NP: Articles of Incorporation with Nonprofit IRS Attachment)","filing_fee":25,"filing_fee_note":"Form CD-1NP includes a nonprofit IRS attachment for the 501(c)(3) language; file online (One Stop) or by mail; fee waived for qualifying veteran-owned entities","registered_agent_rule":"Required; must have a West Virginia street address where the agent can receive legal documents","registered_agent_required":true,"min_directors":1,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"January 1 through June 30 each year following the calendar year of registration","charitable_solicitation_required":true,"charitable_solicitation_detail":"Register with the WV Secretary of State (Form CHR-1) BEFORE soliciting; annual registration fee $15-$50 with annual financial reporting (late filings add $25/month, capped at $500 per year)","publication_required":false,"verified_as_of":"2026-10-15"},"WY":{"state":"Wyoming","filing_office":"Wyoming Secretary of State","form_name":"Articles of Incorporation (Nonprofit Corporation)","filing_fee":50,"filing_fee_note":"File online at wyobiz.wyo.gov or by mail; a signed Consent to Appointment by Registered Agent must accompany the filing","registered_agent_rule":"Required; must have a Wyoming street address (no PO box); the agent must sign a Consent to Appointment","registered_agent_required":true,"min_directors":3,"annual_report_fee":25,"annual_report_frequency":"Annual","annual_report_due":"Due each year on the first day of the anniversary month of formation; dissolved if not paid within 60 days of the due date","charitable_solicitation_required":false,"charitable_solicitation_detail":"Not required — Wyoming has no charitable solicitation registration law","publication_required":false,"verified_as_of":"2026-10-15"}};
+/* Wizard + submit to Michelle's Google Form (Nonprofit Formation Intake). */
+(function(){
+  var form=document.getElementById("npForm"),
+      steps=Array.prototype.slice.call(document.querySelectorAll(".wstep")),
+      backBtn=document.getElementById("backBtn"),
+      nextBtn=document.getElementById("nextBtn"),
+      stepErr=document.getElementById("stepErr"),
+      errBox=document.getElementById("formErr"),
+      thanks=document.getElementById("thanks"),
+      pfill=document.getElementById("pfill"),
+      progLabel=document.getElementById("progLabel"),
+      GF_URL="https://docs.google.com/forms/d/e/1FAIpQLSc2BOPZmGblhXTO9TKXfEsklWTtUB_BME2E8C7vPI6uGV_JjA/formResponse",
+      FBZX="3580240373364755097",
+      MAP={
+  "City where organizing": "entry.1017630207",
+  "State where organizing": "entry.108842533",
+  "Founder full name": "entry.957562770",
+  "Founder email": "entry.1753127777",
+  "Founder phone": "entry.1879503329",
+  "Proposed legal name — 1st choice": "entry.1342979923",
+  "Proposed legal name — 2nd choice": "entry.1282353136",
+  "Proposed legal name — 3rd choice": "entry.258641816",
+  "Entity type": "entry.815120709",
+  "Corporate designator preference": "entry.286729801",
+  "Principal office — full street address": "entry.181384945",
+  "Mailing address, if different": "entry.1220059351",
+  "Organization phone": "entry.1315029709",
+  "Organization email": "entry.892304084",
+  "Website (if any)": "entry.146145366",
+  "Fiscal year end (month / day)": "entry.1167952732",
+  "Date the organization should legally exist": "entry.739541282",
+  "For-profit practice (legal name)": "entry.715632414",
+  "Registered agent — full name": "entry.2076111901",
+  "Registered office — street address": "entry.1091994162",
+  "Has the agent agreed to serve?": "entry.1489617708",
+  "Director 1 — full legal name": "entry.973000225",
+  "Director 1 — home address": "entry.633461940",
+  "Director 1 — phone": "entry.1686824374",
+  "Director 1 — email": "entry.769893954",
+  "Director 1 — board role / title, if known": "entry.417086094",
+  "Director 1 — relationship to the for-profit practice": "entry.1060554065",
+  "Director 2 — full legal name": "entry.40806376",
+  "Director 2 — home address": "entry.409360864",
+  "Director 2 — phone": "entry.334949821",
+  "Director 2 — email": "entry.801675226",
+  "Director 2 — board role / title, if known": "entry.494609626",
+  "Director 2 — relationship to the for-profit practice": "entry.1173974930",
+  "Director 3 — full legal name": "entry.404904456",
+  "Director 3 — home address": "entry.2843918",
+  "Director 3 — phone": "entry.52626002",
+  "Director 3 — email": "entry.70168250",
+  "Director 3 — board role / title, if known": "entry.512847766",
+  "Director 3 — relationship to the for-profit practice": "entry.1009728212",
+  "Director 4 — full legal name": "entry.476743914",
+  "Director 4 — home address": "entry.252606183",
+  "Director 4 — phone": "entry.1425104810",
+  "Director 4 — email": "entry.1851249890",
+  "Director 4 — board role / title, if known": "entry.1055705888",
+  "Director 4 — relationship to the for-profit practice": "entry.2002405333",
+  "Director 5 — full legal name": "entry.263902414",
+  "Director 5 — home address": "entry.18518599",
+  "Director 5 — phone": "entry.344088410",
+  "Director 5 — email": "entry.1106632758",
+  "Director 5 — board role / title, if known": "entry.27791895",
+  "Director 5 — relationship to the for-profit practice": "entry.1401538220",
+  "Director 6 — full legal name": "entry.2068569748",
+  "Director 6 — home address": "entry.1668002406",
+  "Director 6 — phone": "entry.245852465",
+  "Director 6 — email": "entry.1574354566",
+  "Director 6 — board role / title, if known": "entry.1133824175",
+  "Director 6 — relationship to the for-profit practice": "entry.1137571646",
+  "Director 7 — full legal name": "entry.2110052631",
+  "Director 7 — home address": "entry.931778566",
+  "Director 7 — phone": "entry.592277877",
+  "Director 7 — email": "entry.1008178846",
+  "Director 7 — board role / title, if known": "entry.622113288",
+  "Director 7 — relationship to the for-profit practice": "entry.2016070871",
+  "Do you have at least 3 independent directors identified?": "entry.1051865900",
+  "Who still needs to be recruited, and by when?": "entry.292446970",
+  "President / CEO": "entry.1128084829",
+  "Secretary": "entry.415979866",
+  "Treasurer": "entry.1732282577",
+  "Other officer — title and name, if any": "entry.581316981",
+  "Will this be a membership organization?": "entry.142556792",
+  "If yes, describe who the members are and what rights they have": "entry.922389416",
+  "Mission statement — what the organization exists to do": "entry.358398858",
+  "Vision statement — the change you want to see in the community": "entry.1565608710",
+  "Programs and services — describe each one": "entry.1545990343",
+  "Who exactly will be served? Describe the underserved communities": "entry.1454152394",
+  "How will the nonprofit find and reach these communities?": "entry.530067963",
+  "Will services be free, sliding-scale, or fee-based? Describe": "entry.656637918",
+  "Programs planned for the future that will not start in year one": "entry.1879322518",
+  "Expected gross receipts — Year 1": "entry.244015611",
+  "Expected gross receipts — Year 2": "entry.511563297",
+  "Expected gross receipts — Year 3": "entry.1140287953",
+  "Expected total assets at any point": "entry.1831323645",
+  "Based on the figures above": "entry.688798510",
+  "Expected funding sources": "entry.388568590",
+  "Other funding source — describe": "entry.1054554563",
+  "Will the nonprofit pay anyone compensation in year one? If yes, who and in what role?": "entry.266163499",
+  "Startup funding — how will filing fees and initial costs be covered?": "entry.1936166253",
+  "Will the nonprofit solicit donations in its home state in year one?": "entry.147429279",
+  "Fundraising methods planned": "entry.117861829",
+  "Other fundraising method — describe": "entry.1960646933",
+  "Will any paid fundraiser or fundraising consultant be used?": "entry.181005733",
+  "Paid fundraiser / consultant name": "entry.1891648533",
+  "Will the organization solicit donations or fundraise in any state other than its home state?": "entry.327919652",
+  "If yes, list each state": "entry.1064529394",
+  "Will the organization conduct any lobbying activities?": "entry.1661842120",
+  "If yes, describe the lobbying activities": "entry.1764255166",
+  "Will the organization participate in any political campaign activity for or against any candidate?": "entry.502949196",
+  "Will the nonprofit share office space with the practice?": "entry.95770712",
+  "If yes — address and approximate square footage": "entry.1758617492",
+  "Will any staff work for both entities?": "entry.208567346",
+  "If yes — which roles?": "entry.15426584",
+  "Will the practice provide any services to the nonprofit? Describe": "entry.117598343",
+  "Will the nonprofit refer clients to the practice, or the practice to the nonprofit? Describe": "entry.452454483",
+  "Founder initials — shared arrangements in writing at fair market value": "entry.722023025",
+  "Incorporator — full legal name": "entry.1141944749",
+  "Incorporator — address": "entry.1243551942",
+  "Incorporator — phone": "entry.336895698",
+  "Incorporator — email": "entry.1944398660",
+  "Best contact for follow-up questions": "entry.1627858535",
+  "Anything else you want your consultant to know": "entry.61650369",
+  "Vice President name": "entry.238510756",
+  "Date of organizational board meeting": "entry.2045721874",
+  "Meeting time": "entry.290310355",
+  "Members present at organizational meeting": "entry.738777911",
+  "How often will the board meet?": "entry.1378912046",
+  "Regular meeting day": "entry.395387842",
+  "Director term length": "entry.863420565",
+  "Who will pay the filing fees?": "entry.375580479",
+  "Who will cover business supply expenses?": "entry.710170219",
+  "Vision point 1": "entry.107885675",
+  "Vision point 2": "entry.95897403",
+  "Vision point 3": "entry.174353612",
+  "Vision point 4": "entry.1237867493",
+  "Objective 1": "entry.858734060",
+  "Objective 2": "entry.758847146",
+  "Objective 3": "entry.1931355643",
+  "Strategy 1": "entry.2014562823",
+  "Strategy 2": "entry.1634829127",
+  "Action plan year range": "entry.366995268",
+  "Action item 1": "entry.238515076",
+  "Action item 2": "entry.1606842326",
+  "Action item 3": "entry.1368071611",
+  "Action item 4": "entry.1444975188"
+},
+      NAMES=["Where Are You Organizing?","Organization Basics","Registered Agent","Board of Directors","Officers",
+             "Mission, Vision & Programs","Business Plan","Financial Picture","Fundraising Plans",
+             "Relationship With the For-Profit","Incorporator","Organizational Meeting","Follow-Up & Next Steps"],
+      cur=0, dirCount=1;
+
+  function showStep(n){
+    cur=n;
+    steps.forEach(function(s,i){ s.style.display = (i===n) ? "block" : "none"; });
+    var pct=Math.round(((n+1)/steps.length)*100);
+    pfill.style.width=pct+"%";
+    progLabel.textContent="Step "+(n+1)+" of "+steps.length+" \u2014 "+NAMES[n];
+    backBtn.style.visibility = (n===0) ? "hidden" : "visible";
+    nextBtn.textContent = (n===steps.length-1) ? "Submit intake form" : "Continue \u2192";
+    stepErr.style.display="none";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function missingIn(stepEl){
+    var missing=[];
+    stepEl.querySelectorAll("[data-req]").forEach(function(el){
+      var label=el.closest(".field").querySelector("label, .qlabel");
+      var lname=label?label.textContent.replace(/\*/g,"").trim():"a required field";
+      if(el.matches("input[type=text],input[type=email],textarea")){
+        if(!el.value.trim()) missing.push(lname);
+      } else if(el.tagName==="SELECT"){
+        if(!el.value) missing.push(lname);
+      } else if(el.classList.contains("field")){
+        var name=el.querySelector("input") && el.querySelector("input").name;
+        var anyChecked=name && stepEl.querySelector('input[name="'+name+'"]:checked');
+        if(!anyChecked) missing.push(lname);
+      }
+    });
+    return missing;
+  }
+
+  backBtn.addEventListener("click",function(){ if(cur>0) showStep(cur-1); });
+
+  nextBtn.addEventListener("click",function(){
+    stepErr.style.display="none";
+    var miss=missingIn(steps[cur]);
+    if(miss.length){
+      stepErr.innerHTML="Please complete the required field"+(miss.length>1?"s":"")+" before continuing: <strong>"+miss.map(function(m){return m;}).join("; ")+"</strong>";
+      stepErr.style.display="block";
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+    if(cur<steps.length-1){ showStep(cur+1); }
+    else { doSubmit(); }
+  });
+
+  /* director blocks: 1 shown, add up to 7 */
+  var addBtn=document.getElementById("addDirBtn");
+  addBtn.addEventListener("click",function(){
+    if(dirCount>=7) return;
+    dirCount++;
+    document.getElementById("dblock-"+dirCount).hidden=false;
+    if(dirCount>=7) addBtn.style.display="none";
+  });
+
+  function fieldVal(name){
+    var list=form.querySelectorAll('[name="'+name+'"]');
+    if(!list.length) return "";
+    if(list[0].type==="radio"){
+      var c=form.querySelector('input[name="'+name+'"]:checked');
+      return c?c.value:"";
+    }
+    return list[0].value||"";
+  }
+
+  function showThanks(){
+    form.style.display="none";
+    document.getElementById("progwrap").style.display="none";
+    thanks.style.display="block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function doSubmit(){
+    errBox.style.display="none";
+    var hp=form.querySelector('input[name="_honey"]');
+    if(hp&&hp.value){ showThanks(); return; }
+    nextBtn.disabled=true;
+    backBtn.disabled=true;
+    var original=nextBtn.textContent;
+    nextBtn.textContent="Sending\u2026";
+    var p=new URLSearchParams();
+    Object.keys(MAP).forEach(function(name){
+      var first=form.querySelector('[name="'+name+'"]');
+      if(!first) return;
+      if(first.type==="checkbox"){
+        form.querySelectorAll('[name="'+name+'"]:checked')
+          .forEach(function(c){ p.append(MAP[name], c.value); });
+        return;
+      }
+      var v=fieldVal(name);
+      if(v!==""&&v!=null){
+        if(first.type==="date"&&/^\d{4}-\d{2}-\d{2}$/.test(v)){
+          var d=v.split("-");
+          p.append(MAP[name]+"_year", String(parseInt(d[0],10)));
+          p.append(MAP[name]+"_month", String(parseInt(d[1],10)));
+          p.append(MAP[name]+"_day", String(parseInt(d[2],10)));
+        } else {
+          p.append(MAP[name], v);
+        }
+      }
+    });
+    p.append("fbzx",FBZX);
+    p.append("fvv","1");
+    p.append("pageHistory","0");
+    fetch(GF_URL,{method:"POST",mode:"no-cors",body:p}).then(
+      function(){ showThanks(); },
+      function(){
+        nextBtn.disabled=false;
+        backBtn.disabled=false;
+        nextBtn.textContent=original;
+        errBox.style.display="block";
+        window.scrollTo({top:0,behavior:"smooth"});
+      }
+    );
+  }
+
+
+  /* ---- state-specific callouts ---- */
+  var STATE_BY_NAME={};
+  Object.keys(STATE_REQ).forEach(function(k){ STATE_BY_NAME[STATE_REQ[k].state]=k; });
+  function selStateName(){
+    var s=form.querySelector('[name="State where organizing"]');
+    return s ? s.value : "";
+  }
+  function setCallout(id, html){
+    var el=document.getElementById(id);
+    if(!el) return;
+    if(!html){ el.hidden=true; el.innerHTML=""; return; }
+    el.innerHTML=html;
+    el.hidden=false;
+  }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+  function renderCallouts(){
+    var nm=selStateName(), code=STATE_BY_NAME[nm];
+    var dt=document.getElementById("dirMinText"), dn=document.getElementById("dirMinNum"),
+        hs=document.getElementById("dirMinHintState"), hn=document.getElementById("dirMinHintNum"),
+        an=document.getElementById("agentNote"), fn=document.getElementById("fundNote");
+    if(!code){
+      setCallout("scFiling",null); setCallout("scAgent",null);
+      setCallout("scBoard",null); setCallout("scFund",null);
+      if(dt) dt.textContent="Your state"; if(dn) dn.textContent="3";
+      if(hs) hs.textContent="Your state"; if(hn) hn.textContent="3";
+      if(an) an.textContent="Every state requires a registered agent with an in-state address. Your state\u2019s exact rule appears below.";
+      if(fn) fn.textContent="Most states require charitable solicitation registration before you ask for donations. Your state\u2019s rule appears below.";
+      return;
+    }
+    var st=STATE_REQ[code];
+    var foot='<p class="scfoot">Requirements verified as of '+esc(st.verified_as_of)+' \u2014 confirm before filing.</p>';
+    setCallout("scFiling",
+      '<p class="schead">Filing in '+esc(st.state)+'</p>'+
+      '<p>File with the <strong>'+esc(st.filing_office)+'</strong> using <strong>'+esc(st.form_name)+'</strong>. Filing fee: <strong>$'+esc(st.filing_fee)+'</strong>.</p>'+
+      (st.filing_fee_note?'<p>'+esc(st.filing_fee_note)+'.</p>':'')+foot);
+    setCallout("scAgent",
+      '<p class="schead">Registered agent — '+esc(st.state)+'</p>'+
+      '<p>'+esc(st.registered_agent_rule)+'.</p>'+foot);
+    setCallout("scBoard",
+      '<p class="schead">Board requirements — '+esc(st.state)+'</p>'+
+      '<p>This state requires at least <strong>'+esc(st.min_directors)+' directors</strong>.</p>'+
+      (st.publication_required?'<p>Note: this state requires newspaper publication of the new nonprofit.</p>':'')+foot);
+    var fundHtml='<p class="schead">Ongoing compliance — '+esc(st.state)+'</p>'+
+      '<p>Annual report: <strong>$'+esc(st.annual_report_fee)+'</strong>, '+esc(st.annual_report_frequency)+', due '+esc(st.annual_report_due)+'.</p>';
+    if(st.charitable_solicitation_required){
+      fundHtml+='<p>Charitable solicitation: '+esc(st.charitable_solicitation_detail)+'.</p>';
+    } else {
+      fundHtml+='<p>Charitable solicitation: no state registration required.</p>';
+    }
+    setCallout("scFund", fundHtml+foot);
+    if(dt) dt.textContent=st.state; if(dn) dn.textContent=st.min_directors;
+    if(hs) hs.textContent=st.state; if(hn) hn.textContent=st.min_directors;
+    if(an) an.textContent = st.registered_agent_required
+      ? st.state+" requires a registered agent with an in-state address. The exact rule appears below."
+      : st.state+" does not require a separate registered agent. Details below.";
+    if(fn) fn.textContent = st.charitable_solicitation_required
+      ? st.state+" requires charitable solicitation registration before you ask for donations. Details below."
+      : st.state+" does not require charitable solicitation registration.";
+  }
+  var stateSel=form.querySelector('[name="State where organizing"]');
+  if(stateSel) stateSel.addEventListener("change", renderCallouts);
+
+  showStep(0);
+})();
+</script>
+
+</body>
+</html>

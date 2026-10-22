@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Intake — Scale With Michelle</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Client Intake Form</title>
+<meta name="description" content="Client intake form for Scale With Michelle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f0; --surface:#fffdf9; --ink:#1e3a30; --text:#33403a; --muted:#6e7a73;
+  --gold:#b08d3e; --gold-hi:#e9c874; --line:#e2d6bf; --req:#a73b47;
+  color-scheme:light;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:0 18px 60px}
+.hero{padding:34px 2px 8px;text-align:center}
+.kicker{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:2.1rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink)}
+.lede{color:var(--muted);margin-top:10px;font-size:.98rem;max-width:52ch;margin-left:auto;margin-right:auto}
+.timenote{margin-top:12px;font-weight:700;font-size:.95rem;color:var(--gold)}
+.goldrule{display:block;width:56px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-hi));margin:18px auto 0;border-radius:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin-top:18px;box-shadow:0 2px 14px rgba(176,141,62,.07)}
+.card h2{font-family:Georgia,"Times New Roman",serif;font-size:1.25rem;font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.card .secsub{font-size:.86rem;color:var(--muted);margin-bottom:6px}
+.field{margin-top:16px}
+.field label,.qlabel{display:block;font-weight:600;font-size:.95rem;color:var(--ink);margin-bottom:8px;line-height:1.45}
+.req{color:var(--req);font-weight:700}
+.field input[type=text],.field input[type=email],.field input[type=date],.field input[type=url],.field textarea{
+  width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 13px;
+  font:500 1rem "DM Sans",system-ui,sans-serif;background:#fff;color:var(--text)}
+.field input:focus,.field textarea:focus{outline:2px solid var(--gold-hi);outline-offset:1px;border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:84px}
+.opts{display:grid;gap:6px;margin-top:4px}
+.opt{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;cursor:pointer;min-height:48px;font-weight:500}
+.opt input{width:19px;height:19px;accent-color:var(--gold);flex:0 0 19px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.opts .subfield{margin-top:2px;margin-left:4px}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0}
+.progwrap{margin-top:22px}
+.proglabel{font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.pbar{height:10px;background:#efe6d2;border-radius:999px;overflow:hidden}
+.pfill{height:100%;width:12.5%;background:linear-gradient(90deg,var(--gold),var(--gold-hi));border-radius:999px;transition:width .3s ease}
+.wnav{display:flex;gap:12px;margin-top:22px}
+.navbtn{flex:1;padding:15px;border-radius:999px;font:700 1rem "DM Sans",system-ui,sans-serif;cursor:pointer;letter-spacing:.02em;transition:box-shadow .2s,transform .1s}
+.navbtn.back{background:transparent;border:1.5px solid var(--line);color:var(--muted)}
+.navbtn.next{background:transparent;border:1.5px solid var(--gold);color:var(--ink);box-shadow:0 0 24px rgba(233,200,116,.35)}
+.navbtn.next:hover{box-shadow:0 0 32px rgba(233,200,116,.55)}
+.navbtn:active{transform:scale(.99)}
+.navbtn[disabled]{opacity:.6;cursor:wait}
+.formerr{display:none;margin-top:14px;padding:12px 14px;border:1px solid #e3b7b0;background:#fdf1ef;border-radius:10px;
+  color:#8c3a32;font-size:.9rem}
+#thanks{display:none;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:34px 24px;text-align:center;box-shadow:0 2px 14px rgba(176,141,62,.07)}
+#thanks h2{font-family:Georgia,"Times New Roman",serif;color:var(--ink);font-size:1.5rem;margin-bottom:10px}
+#thanks p{color:var(--muted);font-size:.96rem;max-width:44ch;margin:0 auto}
+#thanks .goldrule{margin-top:18px}
+footer{margin:36px 4px 0;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.7}
+footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0 auto 14px}
+@media (max-width:480px){
+  h1{font-size:1.75rem}
+  .card{padding:18px 15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="kicker">Scale With Michelle</p>
+    <h1>Client Intake Form</h1>
+    <p class="lede">This form is designed to gather all pertinent information to best serve your administrative needs.</p>
+    <p class="timenote">Please set aside 15–20 minutes to complete this form (assuming requested contact and other detailed information is not readily available to you).</p>
+    <span class="goldrule"></span>
+    <div class="progwrap" id="progwrap">
+      <p class="proglabel" id="progLabel">Step 1 of 8 &mdash; About You</p>
+      <div class="pbar"><div class="pfill" id="pfill"></div></div>
+    </div>
+  </header>
+
+  <form id="intakeForm" method="POST">
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <section class="card wstep">
+      <h2>About you</h2>
+      <div class="field">
+        <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+        <input id="f-email" name="Email" type="email" data-req required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="f-name">Full Name <span class="req" aria-hidden="true">*</span></label>
+        <input id="f-name" name="Full Name" type="text" data-req required autocomplete="name" placeholder="Your full name">
+      </div>
+      <div class="field">
+        <label for="f-dob">Date of birth? <span class="req" aria-hidden="true">*</span></label>
+        <input id="f-dob" name="Date of birth" type="date" data-req required>
+      </div>
+      <div class="field">
+        <label for="f-addr">What is your shipping address? <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="f-addr" name="Shipping address" rows="3" data-req required placeholder="Street, city, state, ZIP"></textarea>
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Access &amp; contact</h2>
+      <div class="field" data-req>
+        <p class="qlabel" id="q-lastpass">Do you have a LastPass account? If so, STOP here and please share the requested vendor, accounts and login details outlined in this form via LastPass. <span class="req" aria-hidden="true">*</span></p>
+        <div class="opts" role="radiogroup" aria-labelledby="q-lastpass">
+          <label class="opt"><input type="radio" name="LastPass account" value="Yes" required> Yes</label>
+          <label class="opt"><input type="radio" name="LastPass account" value="No"> No</label>
+        </div>
+      </div>
+      <div class="field" id="f-lastpass-details-wrap" hidden>
+        <label for="f-lastpass-details">Please share your LastPass account details below.</label>
+        <textarea id="f-lastpass-details" name="LastPass account details" rows="3" autocomplete="off" placeholder="Username/email and anything needed to share via LastPass"></textarea>
+      </div>
+      <div class="field" data-req>
+        <p class="qlabel" id="q-reach">What is the best way to reach you? <span class="req" aria-hidden="true">*</span></p>
+        <div class="opts" role="radiogroup" aria-labelledby="q-reach">
+          <label class="opt"><input type="radio" name="Best way to reach you" value="SMS" required> SMS</label>
+          <label class="opt"><input type="radio" name="Best way to reach you" value="Email"> Email</label>
+          <label class="opt"><input type="radio" name="Best way to reach you" value="Phone Call"> Phone Call</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-contact">Please provide your best contact information below. <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="f-contact" name="Best contact information" rows="3" data-req required></textarea>
+      </div>
+      <div class="field">
+        <label for="f-inbox">Please provide the login and password of the email inbox we will be managing.</label>
+        <textarea id="f-inbox" name="Email inbox login" rows="3" autocomplete="off"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-sched">Do you have a scheduling link for 1:1 calls? If so, please provide the link below and admin login details</label>
+        <input id="f-sched" name="Scheduling link" type="text" placeholder="Paste link and admin login details">
+      </div>
+      <div class="field">
+        <label for="f-video">Do you use a video calling platform for virtual trainings or calls? If so, please provide the link below</label>
+        <input id="f-video" name="Video calling link" type="url" inputmode="url" placeholder="https://">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Travel</h2>
+      <div class="field">
+        <p class="qlabel" id="q-loyalty">Are you under a hotel rewards/loyalty program? If so, please select all that apply and complete the next section.</p>
+        <div class="opts" role="group" aria-labelledby="q-loyalty">
+          <label class="opt"><input type="checkbox" name="Rewards/loyalty programs" value="IHG"> IHG</label>
+          <label class="opt"><input type="checkbox" name="Rewards/loyalty programs" value="Marriott Bonvoy"> Marriott Bonvoy</label>
+          <label class="opt"><input type="checkbox" name="Rewards/loyalty programs" value="Hilton Honors"> Hilton Honors</label>
+          <label class="opt"><input type="checkbox" name="Rewards/loyalty programs" value="Hyatt"> Hyatt</label>
+          <label class="opt"><input type="checkbox" name="Rewards/loyalty programs" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field" id="f-hotelother-wrap" hidden>
+        <label for="f-hotelother">Please enter the name of the other hotel rewards/loyalty program.</label>
+        <input id="f-hotelother" name="Other hotel program name" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-loyaldet">Please provide your rewards/loyalty program login details below.</label>
+        <textarea id="f-loyaldet" name="Rewards/loyalty login details" rows="3" autocomplete="off"></textarea>
+      </div>
+      <div class="field">
+        <p class="qlabel" id="q-floor">Do you prefer a high floor when booking hotel stay?</p>
+        <div class="opts" role="radiogroup" aria-labelledby="q-floor">
+          <label class="opt"><input type="radio" name="High floor preference" value="Yes"> Yes</label>
+          <label class="opt"><input type="radio" name="High floor preference" value="No"> No</label>
+        </div>
+      </div>
+      <div class="field">
+        <p class="qlabel" id="q-ffprog">Are you a part of a frequent flyer rewards program? Please select all that apply. If so, please complete the next section.</p>
+        <div class="opts" role="group" aria-labelledby="q-ffprog">
+          <label class="opt"><input type="checkbox" name="Frequent flyer rewards program" value="SkyMiles"> SkyMiles</label>
+          <label class="opt"><input type="checkbox" name="Frequent flyer rewards program" value="Frequent Flyer"> Frequent Flyer</label>
+          <label class="opt"><input type="checkbox" name="Frequent flyer rewards program" value="Rapid Rewards"> Rapid Rewards</label>
+          <label class="opt"><input type="checkbox" name="Frequent flyer rewards program" value="American Advantage"> American Advantage</label>
+          <label class="opt"><input type="checkbox" name="Frequent flyer rewards program" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field" id="f-ffother-wrap" hidden>
+        <label for="f-ffother">Please enter the name of the other frequent flyer program.</label>
+        <input id="f-ffother" name="Other frequent flyer program name" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-sky">Please provide your SkyMiles /Frequent Flyer /Rapid Rewards program login details.</label>
+        <textarea id="f-sky" name="Airline program login details" rows="3" autocomplete="off"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-ktn">Please provide your SkyMiles / Frequent Flyer / Rapid Rewards and or KTN numbers</label>
+        <input id="f-ktn" name="Airline program and KTN numbers" type="text" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Your team</h2>
+      <p class="secsub">Name and contact number/email for each preferred vendor.</p>
+      <div class="field">
+        <label for="f-wardrobe">Please provide the name and contact number/email of your preferred wardrobe stylist.</label>
+        <input id="f-wardrobe" name="Preferred wardrobe stylist" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-hair">Please provide the name and contact number/email of your preferred hair stylist/barber.</label>
+        <input id="f-hair" name="Preferred hair stylist/barber" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-mua">Please provide the name and contact number/email of your preferred MUA.</label>
+        <input id="f-mua" name="Preferred MUA" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-esth">Please provide the name and contact number/email of your preferred esthetician.</label>
+        <input id="f-esth" name="Preferred esthetician" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-lash">Please provide the name and contact number/email of your preferred lash tech.</label>
+        <input id="f-lash" name="Preferred lash tech" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-wax">Please provide the name and contact number/email of your preferred waxing tech.</label>
+        <input id="f-wax" name="Preferred waxing tech" type="text" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Service Providers</h2>
+      <p class="secsub">Name and contact number/email for each preferred provider.</p>
+      <div class="field">
+        <label for="f-mass">Please provide the name and contact number/email of your preferred masseuse.</label>
+        <input id="f-mass" name="Preferred masseuse" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-lawn">Please provide the name and contact number/email of your preferred lawn care provider.</label>
+        <input id="f-lawn" name="Preferred lawn care provider" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-handy">Please provide the name and contact number/email of your preferred handyman.</label>
+        <input id="f-handy" name="Preferred handyman" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-dent">Please provide the name and contact number/email of your preferred dentist.</label>
+        <input id="f-dent" name="Preferred dentist" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-gyn">Please provide the name and contact number/email of your preferred gynecologist.</label>
+        <input id="f-gyn" name="Preferred gynecologist" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-pcp">Please provide the name and contact number/email of your preferred primary care physician.</label>
+        <input id="f-pcp" name="Preferred primary care physician" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-eye">Please provide the name and contact number/email of your preferred eye doctor.</label>
+        <input id="f-eye" name="Preferred eye doctor" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-fit">Please provide the name and contact number/email of your preferred fitness trainer.</label>
+        <input id="f-fit" name="Preferred fitness trainer" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-chef">Please provide the name and contact number/email of your preferred chef.</label>
+        <input id="f-chef" name="Preferred chef" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-event">Please provide the name and contact number/email of your preferred event coordinator.</label>
+        <input id="f-event" name="Preferred event coordinator" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-child">Please provide the name and contact number/email of your preferred childcare provider.</label>
+        <input id="f-child" name="Preferred childcare provider" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-design">Please provide the name and contact number/email of your preferred graphic designer.</label>
+        <input id="f-design" name="Preferred graphic designer" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-photo">Please provide the name and contact number/email of your preferred photographer/videographer.</label>
+        <input id="f-photo" name="Preferred photographer/videographer" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-av">Please provide the name and contact number/email of your preferred A/V engineer.</label>
+        <input id="f-av" name="Preferred A/V engineer" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-pr">Please provide the name and contact number/email of your preferred PR contact.</label>
+        <input id="f-pr" name="Preferred PR contact" type="text" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Insurance</h2>
+      <p class="secsub">Name and contact number/email for each preferred provider.</p>
+      <div class="field">
+        <label for="f-hoins">Please provide the name and contact number/email of your preferred homeowners insurance provider.</label>
+        <input id="f-hoins" name="Preferred homeowners insurance provider" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-carins">Please provide the name and contact number/email of your preferred car insurance provider.</label>
+        <input id="f-carins" name="Preferred car insurance provider" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-lifeins">Please provide the name and contact number/email of your preferred life insurance provider.</label>
+        <input id="f-lifeins" name="Preferred life insurance provider" type="text" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Emergency Contacts</h2>
+      <p class="secsub">Name and contact number/email for each emergency contact.</p>
+      <div class="field">
+        <p class="qlabel" id="q-empar">Emergency contact (parent) — please select all that apply.</p>
+        <div class="opts" role="group" aria-labelledby="q-empar">
+          <label class="opt"><input type="checkbox" name="Emergency contact - parent" value="Mother"> Mother</label>
+          <div class="field subfield" id="f-emmother-wrap" hidden>
+            <label for="f-emmother">Please provide your mother's name and contact number/email.</label>
+            <input id="f-emmother" name="Mother's name and contact details" type="text" autocomplete="off">
+          </div>
+          <label class="opt"><input type="checkbox" name="Emergency contact - parent" value="Father"> Father</label>
+          <div class="field subfield" id="f-emfather-wrap" hidden>
+            <label for="f-emfather">Please provide your father's name and contact number/email.</label>
+            <input id="f-emfather" name="Father's name and contact details" type="text" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <p class="qlabel" id="q-emsib">Emergency contact (sibling) — please select all that apply.</p>
+        <div class="opts" role="group" aria-labelledby="q-emsib">
+          <label class="opt"><input type="checkbox" name="Emergency contact - sibling" value="Brother"> Brother</label>
+          <div class="field subfield" id="f-embrother-wrap" hidden>
+            <label for="f-embrother">Please provide your brother's name and contact number/email.</label>
+            <input id="f-embrother" name="Brother's name and contact details" type="text" autocomplete="off">
+          </div>
+          <label class="opt"><input type="checkbox" name="Emergency contact - sibling" value="Sister"> Sister</label>
+          <div class="field subfield" id="f-emsister-wrap" hidden>
+            <label for="f-emsister">Please provide your sister's name and contact number/email.</label>
+            <input id="f-emsister" name="Sister's name and contact details" type="text" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-emoth">Please provide the name and contact number/email of your emergency contact (other family/friend).</label>
+        <input id="f-emoth" name="Emergency contact - other family/friend" type="text" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="card wstep">
+      <h2>Preferences</h2>
+      <div class="field">
+        <label for="f-allergy">Do you have any food allergies? If so, please list them all below.</label>
+        <textarea id="f-allergy" name="Food allergies" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-foodpref">Please provide your food and beverage preferences (i.e. Smart Water, blueberries, m&amp;m's, etc.)</label>
+        <textarea id="f-foodpref" name="Food and beverage preferences" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-other">Please provide other information that you may feel is necessary for us to know below.</label>
+        <textarea id="f-other" name="Other information" rows="4"></textarea>
+      </div>
+    </section>
+
+    <p class="formerr" id="stepErr" role="alert"></p>
+    <p class="formerr" id="formErr" role="alert">Something went wrong sending your form. Please check your connection and try again.</p>
+    <div class="wnav">
+      <button type="button" class="navbtn back" id="backBtn">&larr; Back</button>
+      <button type="button" class="navbtn next" id="nextBtn">Continue &rarr;</button>
+    </div>
+  </form>
+
+  <div id="thanks" role="status">
+    <p class="kicker">Thank you</p>
+    <h2>Intake form received</h2>
+    <p>Your answers have been sent. Michelle will review them and be in touch shortly about your command center.</p>
+    <span class="goldrule"></span>
+  </div>
+
+  <footer>
+    <span class="rule"></span>
+    This page is private &mdash; only people with the link can see it.
+  </footer>
+</div>
+<script>
+"use strict";
+/* Submits directly to Michelle's Google Form (Admin Intake Form).
+   Replaces the old FormSubmit email flow. */
+(function(){
+  var form=document.getElementById("intakeForm"),
+      steps=Array.prototype.slice.call(document.querySelectorAll(".wstep")),
+      backBtn=document.getElementById("backBtn"),
+      nextBtn=document.getElementById("nextBtn"),
+      stepErr=document.getElementById("stepErr"),
+      thanks=document.getElementById("thanks"),
+      err=document.getElementById("formErr"),
+      pfill=document.getElementById("pfill"),
+      progLabel=document.getElementById("progLabel"),
+      GF_URL="https://docs.google.com/forms/d/e/1FAIpQLSf9pBCYeps_gcYRZddj8bAol_erEly0SNZHkVxxi7LuYQsU3Q/formResponse",
+      FBZX="-5405838863894486671";
+  /* intake-page field name -> Google Form entry ID */
+  var MAP={
+    "Full Name":"entry.1782708402",
+    "Shipping address":"entry.1941456930",
+    "LastPass account":"entry.483054290",
+    "Best way to reach you":"entry.964527670",
+    "Best contact information":"entry.116037544",
+    "Email inbox login":"entry.1056557320",
+    "Scheduling link":"entry.1383763363",
+    "Video calling link":"entry.358894939",
+    "Rewards/loyalty programs":"entry.1618765125",
+    "Rewards/loyalty login details":"entry.202430328",
+    "High floor preference":"entry.701066010",
+    "Airline program login details":"entry.1643615029",
+    "Airline program and KTN numbers":"entry.1621918610",
+    "Preferred wardrobe stylist":"entry.69803339",
+    "Preferred hair stylist/barber":"entry.1246510801",
+    "Preferred graphic designer":"entry.1318285697",
+    "Preferred photographer/videographer":"entry.1550489257",
+    "Preferred A/V engineer":"entry.761795258",
+    "Preferred PR contact":"entry.1516974309",
+    "Preferred MUA":"entry.2000819435",
+    "Preferred esthetician":"entry.554213725",
+    "Preferred lash tech":"entry.916543019",
+    "Preferred waxing tech":"entry.1579873464",
+    "Preferred masseuse":"entry.1525317094",
+    "Preferred lawn care provider":"entry.1229717408",
+    "Preferred handyman":"entry.1324262459",
+    "Preferred dentist":"entry.1171038312",
+    "Preferred gynecologist":"entry.1920089946",
+    "Preferred primary care physician":"entry.723077580",
+    "Preferred eye doctor":"entry.253586910",
+    "Preferred fitness trainer":"entry.1754173236",
+    "Preferred chef":"entry.1909993064",
+    "Preferred event coordinator":"entry.1478863721",
+    "Preferred childcare provider":"entry.35218613",
+    "Preferred homeowners insurance provider":"entry.124464570",
+    "Preferred car insurance provider":"entry.1428542744",
+    "Preferred life insurance provider":"entry.441872104",
+    "Emergency contact - parent":"entry.1662909612",
+    "Emergency contact - sibling":"entry.860055077",
+    "Emergency contact - other family/friend":"entry.532073045",
+    "LastPass account details":"entry.1357553029",
+    "Frequent flyer rewards program":"entry.1789829123",
+    "Other frequent flyer program name":"entry.302055695",
+    "Other hotel program name":"entry.1675518063",
+    "Mother's name and contact details":"entry.279006223",
+    "Father's name and contact details":"entry.1165077777",
+    "Brother's name and contact details":"entry.461553531",
+    "Sister's name and contact details":"entry.61351582",
+    "Food allergies":"entry.1654755563",
+    "Food and beverage preferences":"entry.1391692140",
+    "Other information":"entry.1711300756"
+  };
+  function fieldVal(name){
+    var list=form.querySelectorAll('[name="'+name+'"]');
+    if(!list.length)return "";
+    if(list[0].type==="radio"){
+      var c=form.querySelector('input[name="'+name+'"]:checked');
+      return c?c.value:"";
+    }
+    return list[0].value||"";
+  }
+  function showThanks(){
+    form.style.display="none";
+    document.getElementById("progwrap").style.display="none";
+    thanks.style.display="block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  /* ---- wizard: one section at a time, with progress bar ---- */
+  var NAMES=["About You","Access & Contact","Travel","Your Team","Service Providers",
+             "Insurance","Emergency Contacts","Preferences"],
+      cur=0;
+  function showStep(n){
+    cur=n;
+    steps.forEach(function(s,i){ s.style.display = (i===n) ? "block" : "none"; });
+    var pct=Math.round(((n+1)/steps.length)*100);
+    pfill.style.width=pct+"%";
+    progLabel.textContent="Step "+(n+1)+" of "+steps.length+" \u2014 "+NAMES[n];
+    backBtn.style.visibility = (n===0) ? "hidden" : "visible";
+    nextBtn.textContent = (n===steps.length-1) ? "Submit intake form" : "Continue \u2192";
+    stepErr.style.display="none";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function missingIn(stepEl){
+    var missing=[];
+    stepEl.querySelectorAll("[data-req]").forEach(function(el){
+      var wrap=el.classList.contains("field")?el:el.closest(".field");
+      var label=wrap?wrap.querySelector("label, .qlabel"):null;
+      var lname=label?label.textContent.replace(/\*/g,"").trim():"a required field";
+      if(el.matches("input[type=text],input[type=email],input[type=date],input[type=url],textarea")){
+        if(!el.value.trim()) missing.push(lname);
+      } else if(el.tagName==="SELECT"){
+        if(!el.value) missing.push(lname);
+      } else if(el.classList.contains("field")){
+        var name=el.querySelector("input") && el.querySelector("input").name;
+        var anyChecked=name && stepEl.querySelector('input[name="'+name+'"]:checked');
+        if(!anyChecked) missing.push(lname);
+      }
+    });
+    return missing;
+  }
+  backBtn.addEventListener("click",function(){ if(cur>0) showStep(cur-1); });
+  nextBtn.addEventListener("click",function(){
+    stepErr.style.display="none";
+    var miss=missingIn(steps[cur]);
+    if(miss.length){
+      stepErr.innerHTML="Please complete the required field"+(miss.length>1?"s":"")+" before continuing: <strong>"+miss.map(function(m){return m;}).join("; ")+"</strong>";
+      stepErr.style.display="block";
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+    if(cur<steps.length-1){ showStep(cur+1); }
+    else { doSubmit(); }
+  });
+  /* conditional fields: LastPass details (on Yes), Other program name (on Other checked) */
+  (function(){
+    var lpWrap=document.getElementById("f-lastpass-details-wrap");
+    function lpToggle(){
+      var sel=form.querySelector('input[name="LastPass account"]:checked');
+      lpWrap.hidden=!(sel&&sel.value==="Yes");
+    }
+    form.querySelectorAll('input[name="LastPass account"]').forEach(function(r){
+      r.addEventListener("change",lpToggle);
+    });
+    lpToggle();
+    var otherWrap=document.getElementById("f-ffother-wrap");
+    var otherBox=form.querySelector('input[name="Frequent flyer rewards program"][value="Other"]');
+    if(otherBox&&otherWrap){
+      otherBox.addEventListener("change",function(){otherWrap.hidden=!otherBox.checked;});
+    }
+    var hotelOtherWrap=document.getElementById("f-hotelother-wrap");
+    var hotelOtherBox=form.querySelector('input[name="Rewards/loyalty programs"][value="Other"]');
+    if(hotelOtherBox&&hotelOtherWrap){
+      hotelOtherBox.addEventListener("change",function(){hotelOtherWrap.hidden=!hotelOtherBox.checked;});
+    }
+    var emMotherWrap=document.getElementById("f-emmother-wrap");
+    var emMotherBox=form.querySelector('input[name="Emergency contact - parent"][value="Mother"]');
+    if(emMotherBox&&emMotherWrap){
+      emMotherBox.addEventListener("change",function(){emMotherWrap.hidden=!emMotherBox.checked;});
+    }
+    var emFatherWrap=document.getElementById("f-emfather-wrap");
+    var emFatherBox=form.querySelector('input[name="Emergency contact - parent"][value="Father"]');
+    if(emFatherBox&&emFatherWrap){
+      emFatherBox.addEventListener("change",function(){emFatherWrap.hidden=!emFatherBox.checked;});
+    }
+    var emBrotherWrap=document.getElementById("f-embrother-wrap");
+    var emBrotherBox=form.querySelector('input[name="Emergency contact - sibling"][value="Brother"]');
+    if(emBrotherBox&&emBrotherWrap){
+      emBrotherBox.addEventListener("change",function(){emBrotherWrap.hidden=!emBrotherBox.checked;});
+    }
+    var emSisterWrap=document.getElementById("f-emsister-wrap");
+    var emSisterBox=form.querySelector('input[name="Emergency contact - sibling"][value="Sister"]');
+    if(emSisterBox&&emSisterWrap){
+      emSisterBox.addEventListener("change",function(){emSisterWrap.hidden=!emSisterBox.checked;});
+    }
+  })();
+  function doSubmit(){
+    err.style.display="none";
+    /* honeypot: bots see the thank-you screen, but nothing is sent */
+    var hp=form.querySelector('input[name="_honey"]');
+    if(hp&&hp.value){showThanks();return;}
+    nextBtn.disabled=true;
+    backBtn.disabled=true;
+    var original=nextBtn.textContent;
+    nextBtn.textContent="Sending\u2026";
+    var p=new URLSearchParams();
+    var email=fieldVal("Email");
+    if(email)p.append("emailAddress",email);
+    Object.keys(MAP).forEach(function(name){
+      var first=form.querySelector('[name="'+name+'"]');
+      if(first&&first.type==="checkbox"){
+        form.querySelectorAll('[name="'+name+'"]:checked')
+          .forEach(function(c){p.append(MAP[name],c.value);});
+        return;
+      }
+      var v=fieldVal(name);
+      if(v!==""&&v!=null)p.append(MAP[name],v);
+    });
+    var dob=fieldVal("Date of birth");
+    if(dob){
+      var d=dob.split("-");
+      if(d.length===3){
+        p.append("entry.789761510_year",String(parseInt(d[0],10)));
+        p.append("entry.789761510_month",String(parseInt(d[1],10)));
+        p.append("entry.789761510_day",String(parseInt(d[2],10)));
+      }
+    }
+    p.append("fbzx",FBZX);
+    p.append("fvv","1");
+    p.append("pageHistory","0");
+    fetch(GF_URL,{method:"POST",mode:"no-cors",body:p}).then(
+      function(){showThanks();},
+      function(){
+        nextBtn.disabled=false;
+        backBtn.disabled=false;
+        nextBtn.textContent=original;
+        err.style.display="block";
+        window.scrollTo({top:0,behavior:"smooth"});
+      }
+    );
+  }
+  /* Enter key anywhere in the form behaves like Continue */
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    nextBtn.click();
+  });
+  showStep(0);
+})();
+</script>
+</body>
+</html>
+
+</body>
+</html>
