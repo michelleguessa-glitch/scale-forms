@@ -408,6 +408,7 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
       FBZX="-2727973596537621107";
   /* intake-page field name -> Google Form entry ID */
   var MAP={
+    "Email":"entry.1739244496",
     "Full Name":"entry.1539931727",
     "Shipping address":"entry.1883436757",
     "LastPass account":"entry.1831530433",
@@ -574,8 +575,6 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
     nextBtn.textContent="Sending\u2026";
     var pairs=[];
     function add(k,v){pairs.push([k,v]);}
-    var email=fieldVal("Email");
-    if(email)add("emailAddress",email);
     Object.keys(MAP).forEach(function(name){
       var first=form.querySelector('[name="'+name+'"]');
       if(first&&first.type==="checkbox"){
