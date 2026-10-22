@@ -579,7 +579,17 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
       var first=form.querySelector('[name="'+name+'"]');
       if(first&&first.type==="checkbox"){
         form.querySelectorAll('[name="'+name+'"]:checked')
-          .forEach(function(c){add(MAP[name],c.value);});
+          .forEach(function(c){
+            if(MAP[name]==="entry.1789829123"&&c.value==="Other"){
+              /* the form's fifth flyer-program option is its built-in Other
+                 slot — send it the way Google's own form sends it */
+              add(MAP[name],"__other_option__");
+              var onm=fieldVal("Other frequent flyer program name");
+              add(MAP[name]+".other_option_response", onm!==""&&onm!=null?onm:"Other");
+            } else {
+              add(MAP[name],c.value);
+            }
+          });
         return;
       }
       var v=fieldVal(name);
