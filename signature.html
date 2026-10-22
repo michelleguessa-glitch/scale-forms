@@ -7,7 +7,8 @@
 </head>
 <body>
 <style>
-  html,body{background:#faf7f0;margin:0;padding:0}
+  html,body{background:#faf7f0;margin:0;padding:0;overscroll-behavior:none}
+  @media (max-width:560px){ .wrap{margin:12px auto;padding:24px 18px 30px} }
   .wrap{font-family:Georgia,'Times New Roman',serif;color:#000;background:#faf7f0;max-width:640px;margin:40px auto;padding:36px 28px 44px;line-height:1.65;border:1px solid #e2d6bf;border-radius:18px;box-shadow:0 2px 14px rgba(176,141,62,.07)}
   h1{font-size:24px;font-weight:700;color:#1e3a30;margin:0 0 6px;text-align:center}
   h1::after{content:"";display:block;width:64px;height:3px;background:linear-gradient(90deg,#b08d3e,#e9c874);margin:12px auto 0;border-radius:2px}
@@ -60,6 +61,9 @@
     if (!hasDrawn){ hasDrawn = true; $("sighint").style.display = "none"; }
     ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(last.x + 0.1, last.y + 0.1); ctx.stroke();
     e.preventDefault();
+  });
+  ["touchstart","touchmove"].forEach(function(evt){
+    pad.addEventListener(evt, function(e){ e.preventDefault(); }, { passive: false });
   });
   pad.addEventListener("pointermove", function(e){
     if (!drawing) return;
