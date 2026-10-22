@@ -141,7 +141,8 @@
   <div class="paybox noprint">
     <h2>Complete Your Payment</h2>
     <p>Your amount due upon signing is <strong><span id="payDue"></span></strong>. Pay now with PayPal:</p>
-    <a class="btn paypal" id="payBtn" href="https://paypal.me/MichelleGuess67" target="_blank" rel="noopener">Pay with PayPal</a>
+    <a class="btn paypal" id="payBtn" href="https://paypal.me/MichelleGuess67" target="_blank" rel="noopener">Pay Now</a>
+    <p style="margin-top:12px">A 3.3% merchant service fee will be added when you pay with PayPal. Your PayPal total is <strong><span id="payTotal"></span></strong> (<span id="payBreak"></span>).</p>
     <p style="margin-top:14px">Prefer Zelle? Send <strong><span id="zelleAmt"></span></strong> to <strong>Michelle Guess, 352-279-7883</strong> — no fee.</p>
   </div>
   <h1>Non Profit Organizing Documents Agreement</h1>
@@ -223,13 +224,13 @@
   $("sdate").value = todayStr();
 
   // ---- service selection ----
-  var dueText = "";
+  var dueText = "", feeText = "", payTotalText = "";
   function pickSvc(){
     var std = $("svcStd").checked, exp = $("svcExp").checked;
     $("cardStd").classList.toggle("sel", std);
     $("cardExp").classList.toggle("sel", exp);
-    if (std){ dueText = "$348.50"; $("dueBox").textContent = "Amount due upon signing: $348.50 (50% deposit)"; }
-    else if (exp){ dueText = "$947.00"; $("dueBox").textContent = "Amount due upon signing: $947.00 (full payment)"; }
+    if (std){ dueText = "$348.50"; feeText = "$11.50"; payTotalText = "$360.00"; $("dueBox").textContent = "Amount due upon signing: $348.50 (50% deposit)"; }
+    else if (exp){ dueText = "$947.00"; feeText = "$31.25"; payTotalText = "$978.25"; $("dueBox").textContent = "Amount due upon signing: $947.00 (full payment)"; }
     else { dueText = ""; $("dueBox").textContent = "Amount due upon signing: please choose a service above"; }
   }
   $("svcStd").addEventListener("change", pickSvc);
@@ -316,8 +317,10 @@
     $("svDue").textContent = dueText;
     $("payDue").textContent = dueText;
     $("zelleAmt").textContent = dueText;
-    $("payBtn").href = "https://paypal.me/MichelleGuess67/" + dueText.replace("$", "");
-    $("payBtn").textContent = "Pay " + dueText + " with PayPal";
+    $("payBtn").href = "https://paypal.me/MichelleGuess67/" + payTotalText.replace("$", "");
+    $("payBtn").textContent = "Pay Now";
+    $("payTotal").textContent = payTotalText;
+    $("payBreak").textContent = dueText + " + " + feeText + " fee";
     $("svSigImg").src = sig;
     $("svTyped").textContent = "";
     $("svDate").textContent = sdate;
