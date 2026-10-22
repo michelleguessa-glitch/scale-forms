@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Signature — Scale With Michelle</title>
+</head>
+<body>
+<style>
+  html,body{background:#faf7f0;margin:0;padding:0}
+  .wrap{font-family:Georgia,'Times New Roman',serif;color:#000;background:#faf7f0;max-width:640px;margin:40px auto;padding:36px 28px 44px;line-height:1.65;border:1px solid #e2d6bf;border-radius:18px;box-shadow:0 2px 14px rgba(176,141,62,.07)}
+  h1{font-size:24px;font-weight:700;color:#1e3a30;margin:0 0 6px;text-align:center}
+  h1::after{content:"";display:block;width:64px;height:3px;background:linear-gradient(90deg,#b08d3e,#e9c874);margin:12px auto 0;border-radius:2px}
+  .sub{font-size:13.5px;margin:0 0 24px;color:#b08d3e;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-align:center}
+  p{font-size:16px;margin:0 0 18px}
+  .padwrap{position:relative;border:1.5px solid #b08d3e;border-radius:10px;background:#fff;overflow:hidden}
+  #sigpad{display:block;width:100%;height:210px;touch-action:none;cursor:crosshair}
+  #sighint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#b9b2a4;font-size:17px;pointer-events:none;font-style:italic}
+  .row{display:flex;gap:12px;margin-top:18px}
+  button{font-family:Georgia,serif;font-size:16.5px;font-weight:700;padding:14px;border-radius:8px;cursor:pointer}
+  #saveBtn{flex:1;background:#1e3a30;color:#fff;border:2px solid #b08d3e;box-shadow:0 0 24px rgba(233,200,116,.35)}
+  #clearSig{background:#fff;color:#1e3a30;border:1.5px solid #b08d3e;padding:14px 22px}
+  .err{display:none;color:#a12622;font-size:15px;margin-top:12px}
+  .note{font-size:13.5px;color:#77705f;margin-top:20px}
+  #doneView{display:none;text-align:center;padding:16px 0 4px}
+  #doneView h2{color:#1e3a30;font-size:21px;margin:0 0 8px}
+</style>
+<div class="wrap">
+  <div id="formView">
+    <h1>Your Signature</h1>
+    <p class="sub">Scale With Michelle</p>
+    <p>Sign in the box below. This signature will be applied automatically to every client agreement, dated with the date each client signs.</p>
+    <div class="padwrap">
+      <canvas id="sigpad" width="760" height="210"></canvas>
+      <div id="sighint">Sign here</div>
+    </div>
+    <div class="row">
+      <button type="button" id="clearSig">Clear</button>
+      <button type="button" id="saveBtn">Save Signature</button>
+    </div>
+    <p class="err" id="errMsg">Please sign in the box first.</p>
+    <p class="note">This page is private — it can only be reached with this link, and your signature is stored in your own account.</p>
+  </div>
+  <div id="doneView">
+    <h2>Saved</h2>
+    <p>Your signature is on file. You can close this page — just let Brandy know you're done.</p>
+    <p class="note">Changed your mind about how it looks? Reload this page, sign again, and save — the newest one is the one that counts.</p>
+  </div>
+</div>
+<script>
+  function $(id){ return document.getElementById(id); }
+  var pad = $("sigpad"), ctx = pad.getContext("2d"), drawing = false, hasDrawn = false, last = null;
+  ctx.lineWidth = 2.4; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#000";
+  function pos(e){
+    var r = pad.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * (pad.width / r.width), y: (e.clientY - r.top) * (pad.height / r.height) };
+  }
+  pad.addEventListener("pointerdown", function(e){
+    drawing = true; last = pos(e); pad.setPointerCapture(e.pointerId);
+    if (!hasDrawn){ hasDrawn = true; $("sighint").style.display = "none"; }
+    ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(last.x + 0.1, last.y + 0.1); ctx.stroke();
+    e.preventDefault();
+  });
+  pad.addEventListener("pointermove", function(e){
+    if (!drawing) return;
+    var p = pos(e);
+    ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+    last = p; e.preventDefault();
+  });
+  function endDraw(){ drawing = false; }
+  pad.addEventListener("pointerup", endDraw);
+  pad.addEventListener("pointercancel", endDraw);
+  $("clearSig").addEventListener("click", function(){
+    ctx.clearRect(0, 0, pad.width, pad.height); hasDrawn = false; $("sighint").style.display = "flex";
+  });
+  function sigDataURL(){
+    var out = document.createElement("canvas");
+    out.width = pad.width; out.height = pad.height;
+    var octx = out.getContext("2d");
+    octx.fillStyle = "#ffffff"; octx.fillRect(0, 0, out.width, out.height);
+    octx.drawImage(pad, 0, 0);
+    return out.toDataURL("image/jpeg", 0.85);
+  }
+  var saving = false;
+  $("saveBtn").addEventListener("click", function(){
+    if (saving) return;
+    if (!hasDrawn){ $("errMsg").style.display = "block"; return; }
+    $("errMsg").style.display = "none";
+    saving = true;
+    var body = new URLSearchParams();
+    body.append("entry.827067793", sigDataURL());
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSem9D3ch_9erJX1ZjlBMgB_PYv24N13rbAiYnRLhDr-bLD0Rg/formResponse", { method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() })
+    .then(showDone).catch(showDone);
+    function showDone(){
+      $("formView").style.display = "none";
+      $("doneView").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+</script>
+</body>
+</html>
