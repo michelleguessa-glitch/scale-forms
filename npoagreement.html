@@ -46,6 +46,10 @@
   .sigfield .val{font-size:19px}
   #signedView{display:none}
   .okbox{border:2px solid #b08d3e;background:#fffdf9;color:#1e3a30;border-radius:8px;padding:14px 18px;font-size:16px;margin-bottom:24px;text-align:center;font-weight:700}
+  .paybox{border:2px solid #b08d3e;background:#fffdf9;border-radius:8px;padding:18px;margin-bottom:24px;text-align:center}
+  .paybox h2{border:none;margin:0 0 8px;padding:0}
+  .paybox p{font-size:15.5px;text-align:center;margin-bottom:12px}
+  .btn.paypal{background:#0070ba;border-color:#005ea6;color:#fff;font-weight:700;width:100%;padding:16px;font-size:17.5px;display:block;text-align:center;text-decoration:none;box-sizing:border-box}
   @media print{
     body *{visibility:hidden}
     #signedView,#signedView *{visibility:visible}
@@ -134,6 +138,12 @@
 
 <div id="signedView">
   <div class="okbox noprint">Your signed agreement has been submitted to Scale With Michelle. A PDF copy will be emailed to you at the email address you provided — you can also print or save this page now for your records.</div>
+  <div class="paybox noprint">
+    <h2>Complete Your Payment</h2>
+    <p>Your amount due upon signing is <strong><span id="payDue"></span></strong>. Pay now with PayPal:</p>
+    <a class="btn paypal" id="payBtn" href="https://paypal.me/MichelleGuess67" target="_blank" rel="noopener">Pay with PayPal</a>
+    <p style="margin-top:14px">Prefer Zelle? Send <strong><span id="zelleAmt"></span></strong> to <strong>Michelle Guess, 352-279-7883</strong> — no fee.</p>
+  </div>
   <h1>Non Profit Organizing Documents Agreement</h1>
   <p class="sub">Scale With Michelle</p>
 
@@ -304,6 +314,10 @@
     $("svOrg").textContent = org;
     $("svSvc").textContent = svc === "Standard" ? "Standard Service ($697.00)" : "Expedited Service ($947.00)";
     $("svDue").textContent = dueText;
+    $("payDue").textContent = dueText;
+    $("zelleAmt").textContent = dueText;
+    $("payBtn").href = "https://paypal.me/MichelleGuess67/" + dueText.replace("$", "");
+    $("payBtn").textContent = "Pay " + dueText + " with PayPal";
     $("svSigImg").src = sig;
     $("svTyped").textContent = "";
     $("svDate").textContent = sdate;
