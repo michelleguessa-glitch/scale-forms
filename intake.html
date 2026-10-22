@@ -422,7 +422,6 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
     "Rewards/loyalty programs":"entry.1220399406",
     "Rewards/loyalty login details":"entry.1700995524",
     "High floor preference":"entry.1130424952",
-    "Airline program login details":"entry.1060704745",
     "Airline program and KTN numbers":"entry.636333607",
     "Preferred wardrobe stylist":"entry.1455121200",
     "Preferred hair stylist/barber":"entry.1080659094",
@@ -605,6 +604,22 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
         add("entry.988501608_month",String(parseInt(d[1],10)));
         add("entry.988501608_day",String(parseInt(d[2],10)));
       }
+    }
+    /* The form's "Travel rewards programs" question only accepts its
+       fixed program names — sending the login-details text there makes
+       Google reject the whole submission, so it is never sent as its own
+       entry. The text rides along with the KTN answer instead, so nothing
+       the client typed is lost. */
+    var ald=fieldVal("Airline program login details");
+    if(ald){
+      var merged=false;
+      for(var i=0;i<pairs.length;i++){
+        if(pairs[i][0]==="entry.636333607"){
+          pairs[i][1]="Airline program login details: "+ald+" | "+pairs[i][1];
+          merged=true; break;
+        }
+      }
+      if(!merged)add("entry.636333607","Airline program login details: "+ald);
     }
     /* Send through the Form Relay — it passes the answers into the Google
        Form from the server side. If the relay cannot be reached at all,
