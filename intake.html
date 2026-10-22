@@ -572,41 +572,74 @@ footer .rule{display:block;width:44px;height:2px;background:var(--line);margin:0
     backBtn.disabled=true;
     var original=nextBtn.textContent;
     nextBtn.textContent="Sending\u2026";
-    var p=new URLSearchParams();
+    var pairs=[];
+    function add(k,v){pairs.push([k,v]);}
     var email=fieldVal("Email");
-    if(email)p.append("emailAddress",email);
+    if(email)add("emailAddress",email);
     Object.keys(MAP).forEach(function(name){
       var first=form.querySelector('[name="'+name+'"]');
       if(first&&first.type==="checkbox"){
         form.querySelectorAll('[name="'+name+'"]:checked')
-          .forEach(function(c){p.append(MAP[name],c.value);});
+          .forEach(function(c){add(MAP[name],c.value);});
         return;
       }
       var v=fieldVal(name);
-      if(v!==""&&v!=null)p.append(MAP[name],v);
+      if(v!==""&&v!=null)add(MAP[name],v);
     });
     var dob=fieldVal("Date of birth");
     if(dob){
       var d=dob.split("-");
       if(d.length===3){
-        p.append("entry.988501608_year",String(parseInt(d[0],10)));
-        p.append("entry.988501608_month",String(parseInt(d[1],10)));
-        p.append("entry.988501608_day",String(parseInt(d[2],10)));
+        add("entry.988501608_year",String(parseInt(d[0],10)));
+        add("entry.988501608_month",String(parseInt(d[1],10)));
+        add("entry.988501608_day",String(parseInt(d[2],10)));
       }
     }
-    p.append("fbzx",FBZX);
-    p.append("fvv","1");
-    p.append("pageHistory","0");
-    fetch(GF_URL,{method:"POST",mode:"no-cors",body:p}).then(
-      function(){showThanks();},
-      function(){
+    add("fbzx",FBZX);
+    add("fvv","1");
+    add("pageHistory","0");
+    add("draftResponse","[null,null,\""+FBZX+"\"]");
+    /* Send it as a real form post (the way Google's own form page sends)
+       into a hidden frame — this form silently refuses fetch-style sends. */
+    var sink=document.getElementById("gfSink");
+    if(!sink){
+      sink=document.createElement("iframe");
+      sink.id="gfSink";
+      sink.name="gfSink";
+      sink.style.display="none";
+      document.body.appendChild(sink);
+    }
+    var gf=document.createElement("form");
+    gf.method="POST";
+    gf.action=GF_URL;
+    gf.target="gfSink";
+    gf.style.display="none";
+    pairs.forEach(function(pr){
+      var inp=document.createElement("input");
+      inp.type="hidden";
+      inp.name=pr[0];
+      inp.value=pr[1];
+      gf.appendChild(inp);
+    });
+    document.body.appendChild(gf);
+    var done=false, armed=false;
+    function finish(okSend){
+      if(done)return;
+      done=true;
+      if(okSend){ showThanks(); }
+      else{
         nextBtn.disabled=false;
         backBtn.disabled=false;
         nextBtn.textContent=original;
         err.style.display="block";
         window.scrollTo({top:0,behavior:"smooth"});
       }
-    );
+      if(gf.parentNode)gf.parentNode.removeChild(gf);
+    }
+    sink.onload=function(){ if(armed)finish(true); };
+    setTimeout(function(){ finish(false); }, 12000);
+    armed=true;
+    gf.submit();
   }
   /* Enter key anywhere in the form behaves like Continue */
   form.addEventListener("submit",function(e){
